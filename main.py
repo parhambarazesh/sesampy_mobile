@@ -1,4 +1,3 @@
-
 """
 Script for managing hot reloading of the project.
 For more details see the documentation page -
@@ -25,9 +24,12 @@ resolution = ImageGrab.grab().size
 
 # Change the values of the application window size as you need.
 Config.set("graphics", "height", resolution[1])
-Config.set("graphics", "width", "400")
+Config.set("graphics", "width", "600")
 
 from kivy.core.window import Window
+
+# set window size to fill the screen
+Window.size = (500, resolution[1])
 
 # Place the application window on the right side of the computer screen.
 Window.top = 0
@@ -41,7 +43,7 @@ from kivy.uix.screenmanager import NoTransition
 class sesampy(MDApp):
     KV_DIRS = [os.path.join(os.getcwd(), "View")]
     nav_drawer = ObjectProperty()
-    
+
     def build_app(self) -> MDScreenManager:
         """
         In this method, you don't need to change anything other than the
@@ -57,7 +59,7 @@ class sesampy(MDApp):
                                       ['theme-light-dark', lambda x: None],
                                   ]
                                   )
-        
+
         import View.screens
 
         self.manager_screens = MDScreenManager(transition=NoTransition())
@@ -103,12 +105,14 @@ class sesampy(MDApp):
 
     def nav_drawer_open(self):
         # get the id of the nav drawer
-        current_screen=self.manager_screens.current
+        current_screen = self.manager_screens.current
         if current_screen == "main_screen":
             nav_drawer = self.manager_screens.screens[0].children[0].children[0].children[0]
         elif current_screen == "commands_screen":
-            nav_drawer=self.manager_screens.screens[1].children[0].children[0].children[0]
+            nav_drawer = self.manager_screens.screens[1].children[0].children[0].children[0]
         nav_drawer.set_state("open")
+
+
 sesampy().run()
 
 # After you finish the project, remove the above code and uncomment the below
