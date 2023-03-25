@@ -8,6 +8,8 @@ from Model.command_screen import CommandScreenModel
 from Controller.command_screen import CommandScreenController
 from Model.connector_screen import ConnectorScreenModel
 from Controller.connector_screen import ConnectorScreenController
+from Model.config_screen import ConfigScreenModel
+from Controller.config_screen import ConfigScreenController
 
 screens = {
     "main_screen": {
@@ -21,5 +23,9 @@ screens = {
     "connector_screen": {
         "model": ConnectorScreenModel,
         "controller": ConnectorScreenController,
+    },
+    "config_screen": {
+        "model": ConfigScreenModel,
+        "controller": ConfigScreenController,
     },
 }
