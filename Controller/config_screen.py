@@ -1,7 +1,14 @@
 import importlib
 
+from kivy.uix.floatlayout import FloatLayout
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.floatlayout import MDFloatLayout
+from kivymd.uix.textfield import MDTextField
+
 import View.ConfigScreen.config_screen
-from kivymd.uix.button import MDFloatingActionButtonSpeedDial
+from kivymd.uix.button import MDFloatingActionButtonSpeedDial, MDFlatButton
+
 # We have to manually reload the view module in order to apply the
 # changes made to the code on a subsequent hot reload.
 # If you no longer need a hot reload, you can delete this instruction.
@@ -19,7 +26,7 @@ class ConfigScreenController:
     def __init__(self, model):
         self.model = model  # Model.command_screen.CommandScreenModel
         self.view = View.ConfigScreen.config_screen.ConfigScreenView(controller=self, model=self.model)
-        self.speed_dial_data=model.speed_dial_data
+        self.speed_dial_data = model.speed_dial_data
 
         speed_dial = MDFloatingActionButtonSpeedDial()
         speed_dial.data = self.speed_dial_data
@@ -33,7 +40,50 @@ class ConfigScreenController:
 
     def callback_for_menu_items(self, instance):
         print(instance.icon)
-        if instance.icon == 'pipe-disconnected':
-            self.view.manager_screens.current = 'Node Config'
-        elif instance.icon == 'connection':
-            self.view.manager_screens.current = 'Connector Config'
+        if instance.icon == "pipe-disconnected":
+            self.dialog = self.get_dialog_box("Node")
+        elif instance.icon == "connection":
+            self.dialog = self.get_dialog_box("OAuth2")
+        elif instance.icon == "alpha-t":
+            self.dialog = self.get_dialog_box("Tripletex")
+        self.dialog.open()
+
+    def get_dialog_box(self, config):
+        return MDDialog(
+            title="Node Config" if config == "Node" else "OAuth2 Config" if config == "OAuth2" else "Tripletex Config",
+            type="custom",
+            content_cls=MDBoxLayout(
+                MDTextField(
+                    hint_text="Node URL" if config == "Node" else "CLIENT ID" if config == "OAuth2" else "CONSUMER_TOKEN",
+                ),
+                MDTextField(
+                    hint_text="JWT Token" if config == "Node" else "CLIENT SECRET" if config == "OAuth2" else "EMPLOYEE_TOKEN",
+                ),
+                orientation="vertical",
+                spacing="12dp",
+                size_hint_y=None,
+                height="120dp",
+                id="config_data",
+            ),
+            buttons=[
+                MDFlatButton(
+                    text="CANCEL",
+                    theme_text_color="Custom",
+                    on_release=self.cancel_dialog,
+                ),
+                MDFlatButton(
+                    text="OK",
+                    theme_text_color="Custom",
+                    on_release=lambda x: self.submit_dialog(x, config),
+                ),
+            ],
+        )
+
+    def cancel_dialog(self, instance):
+        self.dialog.dismiss()
+
+    def submit_dialog(self,instance, config):
+        self.dialog.dismiss()
+        config_data1 = self.dialog.content_cls.children[1].text
+        config_data2 = self.dialog.content_cls.children[0].text
+        print(config_data1, config_data2)
