@@ -8,5 +8,6 @@ class ConfigScreenModel(BaseScreenModel):
     """
     speed_dial_data = {
         'Node Config': 'pipe-disconnected',
-        'Connector Config': 'connection',
+        'OAth2 Config': 'connection',
+        'Tripletex Config': 'alpha-t',
     }
