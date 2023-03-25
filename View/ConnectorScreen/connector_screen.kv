@@ -1,7 +1,29 @@
 <ConnectorScreenView>
-    MDLabel:
-        text: "Connector screen"
-        halign: "center"
+    MDBoxLayout:
+        id: box
+        orientation: 'vertical'
+        ScrollView:
+            id: connector_list_view
+            size_hint_y: 0.5
+            size_hint_x: 1
+            spacing: '8dp'
+            padding: '8dp'
+            MDList:
+                id: connector_list
+                MDLabel:
+                    text: 'Configurations'
+                    halign: 'center'
+                    font_style: 'H6'
+                    theme_text_color: 'Primary'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+        MDLabel:
+            id: connector_label
+            text: 'Connector'
+            font_style: 'H6'
+            halign: 'center'
+
+
     MDScreenManager:
         MDScreen:
             MDNavigationDrawer:
