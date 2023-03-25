@@ -1,5 +1,5 @@
 import importlib
-
+import os
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog
@@ -86,4 +86,18 @@ class ConfigScreenController:
         self.dialog.dismiss()
         config_data1 = self.dialog.content_cls.children[1].text
         config_data2 = self.dialog.content_cls.children[0].text
-        print(config_data1, config_data2)
+        if config_data1=="" or config_data2=="":
+            return
+
+        if config=="Node":
+            with open(os.path.join(os.getcwd(), "core/.syncconfig"), "w+") as f:
+                f.write(f'JWT="{config_data1}"\n')
+                f.write(f'Node URL="{config_data2}"')
+        elif config=="OAuth2":
+            with open(os.path.join(os.getcwd(), "core/.authconfig"), "w+") as f:
+                f.write(f'CLIENT_ID="{config_data1}"\n')
+                f.write(f'CLIENT_SECRET="{config_data2}"\n')
+        elif config=="Tripletex":
+            with open(os.path.join(os.getcwd(), "core/.authconfig"), "w+") as f:
+                f.write(f'CONSUMER_TOKEN="{config_data1}"\n')
+                f.write(f'EMPLOYEE_TOKEN="{config_data2}"\n')
