@@ -55,7 +55,6 @@ class ConfigScreenController:
         return self.view
 
     def callback_for_menu_items(self, instance):
-        print(instance.icon)
         if instance.icon == "pipe-disconnected":
             self.dialog = self.get_dialog_box("Node")
         elif instance.icon == "connection":
