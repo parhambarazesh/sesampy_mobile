@@ -59,7 +59,6 @@ class sesampy(MDApp):
                                       ['theme-light-dark', lambda x: None],
                                   ]
                                   )
-
         import View.screens
 
         self.manager_screens = MDScreenManager(transition=NoTransition())
@@ -77,7 +76,6 @@ class sesampy(MDApp):
 
         self.layout = BoxLayout(orientation='vertical')
         self.layout.add_widget(top_app_bar)
-        # layout.add_widget(nav_drawer)
         self.layout.add_widget(self.manager_screens)
 
         return self.layout
@@ -104,16 +102,14 @@ class sesampy(MDApp):
         # self.manager_screens.transition=SlideTransition()
 
     def nav_drawer_open(self):
-        # get the id of the nav drawer
-        current_screen = self.manager_screens.current
-        if current_screen == "main_screen":
-            nav_drawer = self.manager_screens.screens[0].children[0].children[0].children[0]
-        elif current_screen == "commands_screen":
-            nav_drawer = self.manager_screens.screens[1].children[0].children[0].children[0]
+        current_screen = self.manager_screens.current_screen
+        nav_drawer=current_screen.ids.nav_drawer
         nav_drawer.set_state("open")
 
 
 sesampy().run()
+
+# sesampy().run()
 
 # After you finish the project, remove the above code and uncomment the below
 # code to test the application normally without hot reloading.
