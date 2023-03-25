@@ -4,6 +4,7 @@
         ScrollView:
             MDList:
                 spacing: '8dp'
+                padding: '8dp'
                 MDLabel:
                     text: 'Configurations'
                     halign: 'center'
@@ -14,11 +15,27 @@
                 MDTextField:
                     hint_text: "Node URL"
                     mode: "round"
-                    icon_left: "web"
+                    icon_left: "pipe-disconnected"
                 MDTextField:
                     hint_text: "Node JWT token"
                     mode: "round"
-                    icon_left: "key"
+                    icon_left: "pipe-disconnected"
+                MDTextField:
+                    hint_text: "OAuth2 Client ID"
+                    mode: "round"
+                    icon_left: "connection"
+                MDTextField:
+                    hint_text: "OAuth2 Client Secret"
+                    mode: "round"
+                    icon_left: "connection"
+                MDTextField:
+                    hint_text: "Tripletex Client ID"
+                    mode: "round"
+                    icon_left: "alpha-t"
+                MDTextField:
+                    hint_text: "Tripletex Client Secret"
+                    mode: "round"
+                    icon_left: "alpha-t"
 
     MDScreenManager:
         MDScreen:
