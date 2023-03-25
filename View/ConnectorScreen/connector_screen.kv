@@ -1,0 +1,57 @@
+<ConnectorScreenView>
+    MDLabel:
+        text: "Connector screen"
+        halign: "center"
+    MDScreenManager:
+        MDScreen:
+            MDNavigationDrawer:
+                id: nav_drawer
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: '8dp'
+                    padding: '8dp'
+                    Image:
+                        source: 'assets/images/sesam_logo.png'
+                        size_hint: (1, None)
+                        height: Window.height * 0.3
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    ScrollView:
+                        MDList:
+                            OneLineIconListItem:
+                                text: 'Commands'
+                                on_release:
+                                    nav_drawer.set_state('close')
+                                    app.switch_window('command_screen')
+                                    # app.root.current = 'command_screen'
+                                    # app.root.manager.transition.direction = "left"
+                                IconLeftWidget:
+                                    icon: 'apple-keyboard-command'
+                            OneLineIconListItem:
+                                text: 'Connectors'
+                                on_release:
+                                    nav_drawer.set_state('close')
+                                    app.switch_window('connector_screen')
+                                    #app.root.current = 'connector_screen'
+                                    # call test function
+                                    # root.set_up_connectors()
+                                IconLeftWidget:
+                                    icon: 'connection'
+                            OneLineIconListItem:
+                                text: 'Configs'
+                                on_release:
+                                    nav_drawer.set_state('close')
+                                    app.root.current = 'config_screen'
+                                IconLeftWidget:
+                                    icon: 'cogs'
+                            OneLineIconListItem:
+                                text: 'Exit'
+                                on_release: app.stop()
+                                IconLeftWidget:
+                                    icon: 'exit-to-app'
+
+                    MDLabel:
+                        text: 'v.1.0.0'
+                        font_style: 'Caption'
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: 'center'
