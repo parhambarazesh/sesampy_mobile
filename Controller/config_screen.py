@@ -32,10 +32,26 @@ class ConfigScreenController:
         speed_dial.data = self.speed_dial_data
         speed_dial.root_button_anim = True
         speed_dial.callback = self.callback_for_menu_items
+
+        with open(os.path.join(os.getcwd(),"core/.syncconfig"), "r") as f:
+            content = f.read()
+            key_value_pairs = [line.strip('"').split('=') for line in content.splitlines()]
+            obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
+            self.view.ids.node_url.text = obj['Node URL']
+            self.view.ids.node_jwt_token.text = obj['JWT']
+        with open(os.path.join(os.getcwd(),"core/.authconfig"), "r") as f:
+            content = f.read()
+            key_value_pairs = [line.strip('"').split('=') for line in content.splitlines()]
+            obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
+            if "CLIENT_ID" in obj and "CLIENT_SECRET" in obj:
+                self.view.ids.oauth2_client_id.text = obj['CLIENT_ID']
+                self.view.ids.oauth2_client_secret.text = obj['CLIENT_SECRET']
+            elif "CONSUMER_TOKEN" in obj and "EMPLOYEE_TOKEN" in obj:
+                self.view.ids.tripletex_consumer_token.text = obj['CONSUMER_TOKEN']
+                self.view.ids.tripletex_employee_token.text = obj['EMPLOYEE_TOKEN']
         self.view.add_widget(speed_dial)
 
     def get_view(self) -> View.ConfigScreen.config_screen:
-
         return self.view
 
     def callback_for_menu_items(self, instance):
@@ -93,11 +109,23 @@ class ConfigScreenController:
             with open(os.path.join(os.getcwd(), "core/.syncconfig"), "w+") as f:
                 f.write(f'JWT="{config_data1}"\n')
                 f.write(f'Node URL="{config_data2}"')
+                self.view.ids.node_url.text = config_data2
+                self.view.ids.node_jwt_token.text = config_data1
         elif config=="OAuth2":
             with open(os.path.join(os.getcwd(), "core/.authconfig"), "w+") as f:
                 f.write(f'CLIENT_ID="{config_data1}"\n')
                 f.write(f'CLIENT_SECRET="{config_data2}"\n')
+                self.view.ids.oauth2_client_id.text = config_data1
+                self.view.ids.oauth2_client_secret.text = config_data2
+
+                self.view.ids.tripletex_consumer_token.text = "Tripletex Consumer Token"
+                self.view.ids.tripletex_employee_token.text = "Tripletex Employee Token"
         elif config=="Tripletex":
             with open(os.path.join(os.getcwd(), "core/.authconfig"), "w+") as f:
                 f.write(f'CONSUMER_TOKEN="{config_data1}"\n')
                 f.write(f'EMPLOYEE_TOKEN="{config_data2}"\n')
+                self.view.ids.tripletex_consumer_token.text = config_data1
+                self.view.ids.tripletex_employee_token.text = config_data2
+
+                self.view.ids.oauth2_client_id.text = "OAuth2 Client ID"
+                self.view.ids.oauth2_client_secret.text = "OAuth2 Client Secret"
