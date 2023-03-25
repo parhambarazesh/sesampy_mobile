@@ -4,16 +4,22 @@
 
 from Model.main_screen import MainScreenModel
 from Controller.main_screen import MainScreenController
-from Model.commands_screen import CommandsScreenModel
-from Controller.commands_screen import CommandsScreenController
+from Model.command_screen import CommandScreenModel
+from Controller.command_screen import CommandScreenController
+from Model.connector_screen import ConnectorScreenModel
+from Controller.connector_screen import ConnectorScreenController
 
 screens = {
     "main_screen": {
         "model": MainScreenModel,
         "controller": MainScreenController,
     },
-    "commands_screen": {
-        "model": CommandsScreenModel,
-        "controller": CommandsScreenController,
+    "command_screen": {
+        "model": CommandScreenModel,
+        "controller": CommandScreenController,
+    },
+    "connector_screen": {
+        "model": ConnectorScreenModel,
+        "controller": ConnectorScreenController,
     },
 }
