@@ -40,7 +40,8 @@
                                 text: 'Configs'
                                 on_release:
                                     nav_drawer.set_state('close')
-                                    app.root.current = 'config_screen'
+                                    app.switch_window('config_screen')
+                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
                             OneLineIconListItem:
