@@ -1,4 +1,5 @@
 from Model.base_model import BaseScreenModel
+import os
 
 
 class ConnectorScreenModel(BaseScreenModel):
@@ -6,12 +7,13 @@ class ConnectorScreenModel(BaseScreenModel):
     Implements the logic of the
     :class:`~View.command_screen.CommandScreen.CommandScreenView` class.
     """
+    #
 
     speed_dial_data = {
         'Add Connector': 'connection',
     }
 
-    connectors_list=[
+    connectors_list = [
         ('tripletex', 'https://github.com/sesam-io/tripletex-connector'),
         ('hubspot', 'https://github.com/sesam-io/hubspot-connector'),
         ('superoffice', 'https://github.com/sesam-io/superoffice-connector'),
@@ -29,3 +31,8 @@ class ConnectorScreenModel(BaseScreenModel):
         ('nace', 'https://github.com/sesam-io/nace-connector'),
         ('twelvedata', 'https://github.com/sesam-io/twelvedata-connector')
     ]
+
+    downloaded_connectors = []
+    for connector in connectors_list:
+        if os.path.exists(os.path.join('core', f"{connector[0]}-connector")):
+            downloaded_connectors.append(connector[0])
