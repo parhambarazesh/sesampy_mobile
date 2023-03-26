@@ -1,4 +1,5 @@
 import importlib
+import shutil
 import webbrowser
 from functools import partial
 import git
@@ -47,19 +48,19 @@ class ConnectorScreenController:
         connectors_list = self.model.connectors_list
         for connector in connectors_list:
             self.view.ids.connector_list.add_widget(
-                TwoLineAvatarIconListItem(
+                OneLineAvatarIconListItem(
                     IconLeftWidget(
                         id="icon_left",
                         icon="cog",
                         theme_text_color="Custom",
-                        text_color="blue" if connector[0] in self.downloaded_connectors else "red"
+                        text_color="blue" if not connector[0] in self.downloaded_connectors else "red"
                     ),
                     IconRightWidget(
                         id="icon_right",
-                        icon="download",
-                        on_release=partial(self.download_connector, connector),
+                        icon="download" if connector[0] not in self.downloaded_connectors else "delete",
+                        on_release=partial(self.download_or_delete_connector, connector),
                         theme_text_color = "Custom",
-                        text_color = "blue" if connector[0] in self.downloaded_connectors else "red"
+                        text_color = "blue" if not connector[0] in self.downloaded_connectors else "red",
                     ),
                     text=connector[0],
                     secondary_text=connector[1],
@@ -73,14 +74,27 @@ class ConnectorScreenController:
     def get_view(self) -> View.ConnectorScreen.connector_screen:
         return self.view
 
-    def download_connector(self, connector, *args):
-        os.chdir('core')
-        git.Git().clone(connector[1])
-        os.chdir('..')
+    def download_or_delete_connector(self, connector, *args):
+
         connector_object_list=[{"id": x.id, "connector": x} for x in self.view.ids.connector_list.children]
         downloaded_connector=[d for d in connector_object_list if d["id"] == f"connector_item_{connector[0]}"][0]
-        downloaded_connector["connector"].ids.icon_right.text_color = [0, 0, 1, 1]
-        downloaded_connector["connector"].ids.icon_left.text_color = [0, 0, 1, 1]
+        if downloaded_connector["connector"].ids.icon_right.icon == "download":
+            print("Downloading connector")
+            os.chdir('core')
+            git.Git().clone(connector[1])
+            os.chdir('..')
+            downloaded_connector["connector"].ids.icon_right.icon = "delete"
+            downloaded_connector["connector"].ids.icon_right.text_color = "red"
+            downloaded_connector["connector"].ids.icon_left.text_color = "red"
+        else:
+            print("Deleting connector")
+            os.chdir('core')
+            shutil.rmtree(f"{connector[0]}-connector")
+            os.chdir('..')
+            downloaded_connector["connector"].ids.icon_right.icon = "download"
+            downloaded_connector["connector"].ids.icon_right.text_color = "blue"
+            downloaded_connector["connector"].ids.icon_left.text_color = "blue"
+
 
     def open_connector(self, connector, *args):
         webbrowser.open_new_tab(connector[1])
