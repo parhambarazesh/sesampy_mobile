@@ -35,13 +35,13 @@ class ConfigScreenController:
 
         with open(os.path.join(os.getcwd(),"core/.syncconfig"), "r") as f:
             content = f.read()
-            key_value_pairs = [line.strip('"').split('=') for line in content.splitlines()]
+            key_value_pairs = [line.strip().split('=', 1) for line in content.splitlines()]
             obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
-            self.view.ids.node_url.text = obj['Node URL']
+            self.view.ids.node_url.text = obj['Node']
             self.view.ids.node_jwt_token.text = obj['JWT']
         with open(os.path.join(os.getcwd(),"core/.authconfig"), "r") as f:
             content = f.read()
-            key_value_pairs = [line.strip('"').split('=') for line in content.splitlines()]
+            key_value_pairs = [line.strip().split('=', 1) for line in content.splitlines()]
             obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
             if "CLIENT_ID" in obj and "CLIENT_SECRET" in obj:
                 self.view.ids.oauth2_client_id.text = obj['CLIENT_ID']
@@ -107,7 +107,7 @@ class ConfigScreenController:
         if config=="Node":
             with open(os.path.join(os.getcwd(), "core/.syncconfig"), "w+") as f:
                 f.write(f'JWT="{config_data1}"\n')
-                f.write(f'Node URL="{config_data2}"')
+                f.write(f'Node="{config_data2}"')
                 self.view.ids.node_url.text = config_data2
                 self.view.ids.node_jwt_token.text = config_data1
         elif config=="OAuth2":
