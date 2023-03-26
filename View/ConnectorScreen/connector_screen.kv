@@ -2,16 +2,19 @@
     MDBoxLayout:
         id: box
         orientation: 'vertical'
+        halign: 'center'
         ScrollView:
             id: connector_list_view
-            size_hint_y: 0.5
-            size_hint_x: 1
             spacing: '8dp'
             padding: '8dp'
+            halign: 'center'
             MDList:
                 id: connector_list
+                padding: '8dp'
+                spacing: '8dp'
+                halign: 'center'
                 MDLabel:
-                    text: 'Configurations'
+                    text: 'Connectors'
                     halign: 'center'
                     font_style: 'H6'
                     theme_text_color: 'Primary'
@@ -19,7 +22,6 @@
                     height: self.texture_size[1]
         MDLabel:
             id: connector_label
-            text: 'Connector'
             font_style: 'H6'
             halign: 'center'
 
