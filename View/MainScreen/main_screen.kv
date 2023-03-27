@@ -1,5 +1,6 @@
 <MainScreenView>
     MDBottomNavigation:
+        id: bottom_navigation_all
         #panel_color: "#eeeaea"
         selected_color_background: "orange"
         text_color_active: "lightgrey"
@@ -18,14 +19,14 @@
                         id: pipes_list
                         spacing: '8dp'
                         padding: '8dp'
-                        MDLabel:
-                            id: title_pipes
-                            text: 'Current Connector: '
-                            halign: 'center'
-                            font_style: 'H6'
-                            theme_text_color: 'Primary'
-                            size_hint_y: None
-                            height: self.texture_size[1]
+#                        MDLabel:
+#                            id: title_pipes
+#                            text: 'Current Connector: '
+#                            halign: 'center'
+#                            font_style: 'H6'
+#                            theme_text_color: 'Primary'
+#                            size_hint_y: None
+#                            height: self.texture_size[1]
 
         MDBottomNavigationItem:
             name: 'system'
@@ -39,14 +40,14 @@
                         id: systems_list
                         spacing: '8dp'
                         padding: '8dp'
-                        MDLabel:
-                            id: title_systems
-                            text: 'Current Connector: '
-                            halign: 'center'
-                            font_style: 'H6'
-                            theme_text_color: 'Primary'
-                            size_hint_y: None
-                            height: self.texture_size[1]
+#                        MDLabel:
+#                            id: title_systems
+#                            text: 'Current Connector: '
+#                            halign: 'center'
+#                            font_style: 'H6'
+#                            theme_text_color: 'Primary'
+#                            size_hint_y: None
+#                            height: self.texture_size[1]
 
         MDBottomNavigationItem:
             name: 'metadata'
@@ -60,14 +61,14 @@
                         id: metadata_list
                         spacing: '8dp'
                         padding: '8dp'
-                        MDLabel:
-                            id: title_metadata
-                            text: 'Current Connector: '
-                            halign: 'center'
-                            font_style: 'H6'
-                            theme_text_color: 'Primary'
-                            size_hint_y: None
-                            height: self.texture_size[1]
+#                        MDLabel:
+#                            id: title_metadata
+#                            text: 'Current Connector: '
+#                            halign: 'center'
+#                            font_style: 'H6'
+#                            theme_text_color: 'Primary'
+#                            size_hint_y: None
+#                            height: self.texture_size[1]
 
         MDBottomNavigationItem:
             id: show
