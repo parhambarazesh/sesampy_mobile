@@ -1,143 +1,169 @@
 <CommandScreenView>
-    MDBoxLayout:
-        id: box
-        orientation: 'vertical'
-        ScrollView:
-            id: scroll
-            MDList:
-                id: command_list
-                spacing: '8dp'
-                padding: '8dp'
-                MDLabel:
-                    id: command
-                    text: 'Commands'
-                    halign: 'center'
-                    font_style: 'H6'
-                    theme_text_color: 'Primary'
+    MDBottomNavigation:
+        #panel_color: "#eeeaea"
+        selected_color_background: "orange"
+        text_color_active: "lightgrey"
+
+        MDBottomNavigationItem:
+            name: 'commands'
+            icon: 'apple-keyboard-command'
+            MDBoxLayout:
+                id: box
+                orientation: 'vertical'
+        #        size_hint_y: 0.5
+                ScrollView:
+                    id: scroll
+                    MDList:
+                        id: command_list
+                        spacing: '8dp'
+                        padding: '8dp'
+                        MDLabel:
+                            id: command
+                            text: 'Commands'
+                            halign: 'center'
+                            font_style: 'H6'
+                            theme_text_color: 'Primary'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                        OneLineAvatarIconListItem:
+                            id: authenticate
+                            text: 'Sesam Authenticate'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: download
+                            text: 'Sesam Download'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                                on_release: root.download()
+                        OneLineAvatarIconListItem:
+                            id: upload
+                            text: 'Sesam Upload'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: status
+                            text: 'Sesam Status'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: verify
+                            text: 'Sesam Verify'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: test
+                            text: 'Sesam Test'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: stop
+                            text: 'Sesam Stop'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: run
+                            text: 'Sesam Run'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: wipe
+                            text: 'Sesam Wipe'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: restart
+                            text: 'Sesam Restart'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: reset
+                            text: 'Sesam Reset'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: convert
+                            text: 'Sesam Convert'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+                        OneLineAvatarIconListItem:
+                            id: dump
+                            text: 'Sesam Dump'
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                icon: 'subdirectory-arrow-left'
+                                theme_text_color: 'Custom'
+                                text_color: "blue"
+        MDBottomNavigationItem:
+            id: logs
+            name: 'logs'
+            icon: 'file-document-alert-outline'
+            on_tab_press: root.get_logs()
+            ScrollView:
+                id: scroll_log
+                MDTextField:
+                    id: log
+                    multiline: True
+                    readonly: True
                     size_hint_y: None
-                    height: self.texture_size[1]
-                OneLineAvatarIconListItem:
-                    id: authenticate
-                    text: 'Sesam Authenticate'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: download
-                    text: 'Sesam Download'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                        on_release: root.download()
-                OneLineAvatarIconListItem:
-                    id: upload
-                    text: 'Sesam Upload'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: status
-                    text: 'Sesam Status'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: verify
-                    text: 'Sesam Verify'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: test
-                    text: 'Sesam Test'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: stop
-                    text: 'Sesam Stop'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: run
-                    text: 'Sesam Run'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: wipe
-                    text: 'Sesam Wipe'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: restart
-                    text: 'Sesam Restart'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: reset
-                    text: 'Sesam Reset'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: convert
-                    text: 'Sesam Convert'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-                OneLineAvatarIconListItem:
-                    id: dump
-                    text: 'Sesam Dump'
-                    IconLeftWidget:
-                        icon: 'apple-keyboard-command'
-                    IconRightWidget:
-                        icon: 'subdirectory-arrow-left'
-                        theme_text_color: 'Custom'
-                        text_color: "blue"
-        MDLabel:
-            id: connector_label
-            font_style: 'H6'
-            halign: 'center'
+                    height: self.minimum_height
+            MDLabel:
+                id: output
+                halign: 'center'
+                mode:"rectangle"
+#        MDLabel:
+#            id: output
+#            halign: 'center'
+#            mode:"rectangle"
     MDScreenManager:
         MDScreen:
             MDNavigationDrawer:
