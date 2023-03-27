@@ -5,6 +5,7 @@
         text_color_active: "lightgrey"
 
         MDBottomNavigationItem:
+            id: pipes
             name: 'pipes'
             icon: 'pipe-disconnected'
             MDBoxLayout:
@@ -12,28 +13,20 @@
                 orientation: 'vertical'
         #        size_hint_y: 0.5
                 ScrollView:
-                    id: scroll
+                    id: scroll_pipes
                     MDList:
-                        id: files_list
+                        id: pipes_list
                         spacing: '8dp'
                         padding: '8dp'
                         MDLabel:
-                            id: files
-                            text: 'Pipes/Systems'
+                            id: title_pipes
+                            text: 'Current Connector: '
                             halign: 'center'
                             font_style: 'H6'
                             theme_text_color: 'Primary'
                             size_hint_y: None
                             height: self.texture_size[1]
-                        OneLineAvatarIconListItem:
-                            id: authenticate
-                            text: 'Sesam Authenticate'
-                            IconLeftWidget:
-                                icon: 'apple-keyboard-command'
-                            IconRightWidget:
-                                icon: 'subdirectory-arrow-left'
-                                theme_text_color: 'Custom'
-                                text_color: "blue"
+
         MDBottomNavigationItem:
             name: 'system'
             icon: 'alpha-s'
@@ -41,63 +34,53 @@
                 id: box
                 orientation: 'vertical'
                 ScrollView:
-                    id: scroll
+                    id: scroll_systems
                     MDList:
-                        id: files_list
+                        id: systems_list
                         spacing: '8dp'
                         padding: '8dp'
                         MDLabel:
-                            id: files
-                            text: 'Pipes/Systems'
+                            id: title_systems
+                            text: 'Current Connector: '
                             halign: 'center'
                             font_style: 'H6'
                             theme_text_color: 'Primary'
                             size_hint_y: None
                             height: self.texture_size[1]
-                        OneLineAvatarIconListItem:
-                            id: authenticate
-                            text: 'Sesam Authenticate'
-                            IconLeftWidget:
-                                icon: 'apple-keyboard-command'
-                            IconRightWidget:
-                                icon: 'subdirectory-arrow-left'
-                                theme_text_color: 'Custom'
-                                text_color: "blue"
+
         MDBottomNavigationItem:
-            name: 'json'
+            name: 'metadata'
             icon: 'code-json'
             MDBoxLayout:
                 id: box
                 orientation: 'vertical'
                 ScrollView:
-                    id: scroll
+                    id: scroll_metadata
                     MDList:
-                        id: files_list
+                        id: metadata_list
                         spacing: '8dp'
                         padding: '8dp'
                         MDLabel:
-                            id: files
-                            text: 'Pipes/Systems'
+                            id: title_metadata
+                            text: 'Current Connector: '
                             halign: 'center'
                             font_style: 'H6'
                             theme_text_color: 'Primary'
                             size_hint_y: None
                             height: self.texture_size[1]
-                        OneLineAvatarIconListItem:
-                            id: authenticate
-                            text: 'Sesam Authenticate'
-                            IconLeftWidget:
-                                icon: 'apple-keyboard-command'
-                            IconRightWidget:
-                                icon: 'subdirectory-arrow-left'
-                                theme_text_color: 'Custom'
-                                text_color: "blue"
+
         MDBottomNavigationItem:
+            id: show
             name: 'show'
             icon: 'eye'
-            MDBoxLayout:
-                id: box
-                orientation: 'vertical'
+            on_tab_press: root.get_file()
+            ScrollView:
+                id: scroll_log
+                MDTextField:
+                    id: show_file
+                    multiline: True
+                    size_hint_y: None
+                    height: self.minimum_height
     MDScreenManager:
         id: screen_manager
         MDScreen:
