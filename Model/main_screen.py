@@ -7,4 +7,4 @@ class MainScreenModel(BaseScreenModel):
     :class:`~View.main_screen.MainScreen.MainScreenView` class.
     """
 
-    current_connector = "tripletex"
+    current_connector = ""
