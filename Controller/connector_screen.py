@@ -3,6 +3,10 @@ import shutil
 import webbrowser
 from functools import partial
 import os
+from Model.main_screen import MainScreenModel
+from View.MainScreen.main_screen import MainScreenView
+from Controller.main_screen import MainScreenController
+
 import certifi
 # os.environ['SSL_CERT_FILE'] = certifi.where()
 # os.environ["GIT_PYTHON_REFRESH"] = "quiet"
@@ -46,12 +50,7 @@ class ConnectorScreenController:
         self.model = model  # Model.command_screen.CommandScreenModel
         self.view = View.ConnectorScreen.connector_screen.ConnectorScreenView(controller=self, model=self.model)
 
-        self.speed_dial_data = model.speed_dial_data
         self.downloaded_connectors = model.downloaded_connectors
-        speed_dial = MDFloatingActionButtonSpeedDial()
-        speed_dial.data = self.speed_dial_data
-        speed_dial.root_button_anim = True
-        speed_dial.callback = self.callback_for_menu_items
 
         connectors_list = self.model.connectors_list
         for connector in connectors_list:
@@ -60,8 +59,9 @@ class ConnectorScreenController:
                     IconLeftWidget(
                         id="icon_left",
                         icon="cog",
+                        on_release=partial(self.set_active_connector, connector),
                         theme_text_color="Custom",
-                        text_color="blue" if not connector[0] in self.downloaded_connectors else "red"
+                        text_color="gold" if connector[0] in MainScreenModel.current_connector else "blue"
                     ),
                     IconRightWidget(
                         id="icon_right",
@@ -77,10 +77,21 @@ class ConnectorScreenController:
                 )
             )
 
-        self.view.add_widget(speed_dial)
 
     def get_view(self) -> View.ConnectorScreen.connector_screen:
         return self.view
+
+    def set_active_connector(self, connector, *args):
+        MainScreenModel.current_connector = connector[0]
+        # MainScreenView.model_is_changed(View.MainScreen.main_screen.MainScreenView)
+        # MainScreenController.update(self)
+        connector_object_list = [{"id": x.id, "connector": x} for x in self.view.ids.connector_list.children][:-1]
+        for connector_item in connector_object_list:
+            if connector_item["id"] != f"connector_item_{MainScreenModel.current_connector}":
+                connector_item["connector"].ids.icon_left.text_color = "blue"
+            else:
+                connector_item["connector"].ids.icon_left.text_color = "gold"
+
 
     def download_or_delete_connector(self, connector, *args):
         try:
@@ -101,13 +112,13 @@ class ConnectorScreenController:
                 # os.chdir("..")
                 downloaded_connector["connector"].ids.icon_right.icon = "delete"
                 downloaded_connector["connector"].ids.icon_right.text_color = "red"
-                downloaded_connector["connector"].ids.icon_left.text_color = "red"
+                # downloaded_connector["connector"].ids.icon_left.text_color = "red"
             else:
                 print("Deleting connector")
                 shutil.rmtree(f"core/{connector[0]}-connector")
                 downloaded_connector["connector"].ids.icon_right.icon = "download"
                 downloaded_connector["connector"].ids.icon_right.text_color = "blue"
-                downloaded_connector["connector"].ids.icon_left.text_color = "blue"
+                # downloaded_connector["connector"].ids.icon_left.text_color = "blue"
         except Exception as e:
             print(f"Some unexpected error happened: {e}")
 
