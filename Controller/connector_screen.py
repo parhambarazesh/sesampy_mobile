@@ -2,8 +2,16 @@ import importlib
 import shutil
 import webbrowser
 from functools import partial
-import git
 import os
+import certifi
+# os.environ['SSL_CERT_FILE'] = certifi.where()
+# os.environ["GIT_PYTHON_REFRESH"] = "quiet"
+# os.environ["GIT_PYTHON_GIT_EXECUTABLE"] = "/usr/bin/git"
+# import git
+from dulwich import porcelain
+# configure dulwich to use certifi
+
+# os.environ["SSL_CERT_FILE"] = "/assets/gitub-com.pem2"
 from kivy.metrics import dp
 from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
@@ -75,26 +83,33 @@ class ConnectorScreenController:
         return self.view
 
     def download_or_delete_connector(self, connector, *args):
-
-        connector_object_list=[{"id": x.id, "connector": x} for x in self.view.ids.connector_list.children]
-        downloaded_connector=[d for d in connector_object_list if d["id"] == f"connector_item_{connector[0]}"][0]
-        if downloaded_connector["connector"].ids.icon_right.icon == "download":
-            print("Downloading connector")
-            os.chdir('core')
-            git.Git().clone(connector[1])
-            os.chdir('..')
-            downloaded_connector["connector"].ids.icon_right.icon = "delete"
-            downloaded_connector["connector"].ids.icon_right.text_color = "red"
-            downloaded_connector["connector"].ids.icon_left.text_color = "red"
-        else:
-            print("Deleting connector")
-            os.chdir('core')
-            shutil.rmtree(f"{connector[0]}-connector")
-            os.chdir('..')
-            downloaded_connector["connector"].ids.icon_right.icon = "download"
-            downloaded_connector["connector"].ids.icon_right.text_color = "blue"
-            downloaded_connector["connector"].ids.icon_left.text_color = "blue"
-
+        try:
+            connector_object_list=[{"id": x.id, "connector": x} for x in self.view.ids.connector_list.children]
+            downloaded_connector=[d for d in connector_object_list if d["id"] == f"connector_item_{connector[0]}"][0]
+            if downloaded_connector["connector"].ids.icon_right.icon == "download":
+                print("Downloading connector")
+                if os.path.exists(f"core/{connector[0]}-connector"):
+                    shutil.rmtree(f"core/{connector[0]}-connector")
+                os.mkdir(f"core/{connector[0]}-connector")
+                repo_url = connector[1]+".git"
+                # repo_url="https://github.com/jelmer/dulwich.git"
+                porcelain.clone(repo_url, f"core/{connector[0]}-connector")
+                print("\n\n\n\n\nCloned repo")
+                #disable ssl verification
+                # os.chdir("core")
+                # git.Git().clone(connector[1], "--config", "http.sslVerify=false")
+                # os.chdir("..")
+                downloaded_connector["connector"].ids.icon_right.icon = "delete"
+                downloaded_connector["connector"].ids.icon_right.text_color = "red"
+                downloaded_connector["connector"].ids.icon_left.text_color = "red"
+            else:
+                print("Deleting connector")
+                shutil.rmtree(f"core/{connector[0]}-connector")
+                downloaded_connector["connector"].ids.icon_right.icon = "download"
+                downloaded_connector["connector"].ids.icon_right.text_color = "blue"
+                downloaded_connector["connector"].ids.icon_left.text_color = "blue"
+        except Exception as e:
+            print(f"Some unexpected error happened: {e}")
 
     def open_connector(self, connector, *args):
         webbrowser.open_new_tab(connector[1])
