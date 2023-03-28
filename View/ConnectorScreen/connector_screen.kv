@@ -1,7 +1,31 @@
-<CommandsScreenView>
-    MDLabel:
-        text: "Commands screen"
-        halign: "center"
+<ConnectorScreenView>
+    MDBoxLayout:
+        id: box
+        orientation: 'vertical'
+        halign: 'center'
+        ScrollView:
+            id: connector_list_view
+            spacing: '8dp'
+            padding: '8dp'
+            halign: 'center'
+            MDList:
+                id: connector_list
+                padding: '8dp'
+                spacing: '8dp'
+                halign: 'center'
+                MDLabel:
+                    text: 'Connectors'
+                    halign: 'center'
+                    font_style: 'H6'
+                    theme_text_color: 'Primary'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+        MDLabel:
+            id: connector_label
+            font_style: 'H6'
+            halign: 'center'
+
+
     MDScreenManager:
         MDScreen:
             MDNavigationDrawer:
@@ -21,8 +45,8 @@
                                 text: 'Commands'
                                 on_release:
                                     nav_drawer.set_state('close')
-                                    app.switch_window('commands_screen')
-                                    # app.root.current = 'commands_screen'
+                                    app.switch_window('command_screen')
+                                    # app.root.current = 'command_screen'
                                     # app.root.manager.transition.direction = "left"
                                 IconLeftWidget:
                                     icon: 'apple-keyboard-command'
@@ -30,16 +54,18 @@
                                 text: 'Connectors'
                                 on_release:
                                     nav_drawer.set_state('close')
-                                    app.root.current = 'connectors_screen'
+                                    app.switch_window('connector_screen')
+                                    #app.root.current = 'connector_screen'
                                     # call test function
                                     # root.set_up_connectors()
                                 IconLeftWidget:
                                     icon: 'connection'
                             OneLineIconListItem:
                                 text: 'Configs'
-                                on_release: 
+                                on_release:
                                     nav_drawer.set_state('close')
-                                    app.root.current = 'configs_screen'
+                                    app.switch_window('config_screen')
+                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
                             OneLineIconListItem:
@@ -47,7 +73,7 @@
                                 on_release: app.stop()
                                 IconLeftWidget:
                                     icon: 'exit-to-app'
-                                
+
                     MDLabel:
                         text: 'v.1.0.0'
                         font_style: 'Caption'

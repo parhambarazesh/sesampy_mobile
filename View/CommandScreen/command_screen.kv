@@ -1,0 +1,298 @@
+<CommandScreenView>
+    MDBottomNavigation:
+        #panel_color: "#eeeaea"
+        selected_color_background: "orange"
+        text_color_active: "lightgrey"
+
+        MDBottomNavigationItem:
+            name: 'commands'
+            icon: 'apple-keyboard-command'
+            MDBoxLayout:
+                id: box
+                orientation: 'vertical'
+        #        size_hint_y: 0.5
+                ScrollView:
+                    id: scroll
+                    MDList:
+                        id: command_list
+                        spacing: '8dp'
+                        padding: '8dp'
+                        MDLabel:
+                            id: command
+                            text: 'Commands'
+                            halign: 'center'
+                            font_style: 'H6'
+                            theme_text_color: 'Primary'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                        OneLineAvatarIconListItem:
+                            id: authenticate
+                            text: 'Sesam Authenticate'
+                            on_release: root.command_thread("authenticate")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_authenticate
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: download
+                            text: 'Sesam Download'
+                            on_release: root.command_thread("download")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_download
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+
+                        OneLineAvatarIconListItem:
+                            id: upload
+                            text: 'Sesam Upload'
+                            on_release: root.command_thread("upload")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_upload
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: status
+                            text: 'Sesam Status'
+                            on_release: root.command_thread("status")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_status
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: verify
+                            text: 'Sesam Verify'
+                            on_release: root.command_thread("verify")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_verify
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: test
+                            text: 'Sesam Test'
+                            on_release: root.command_thread("test")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_test
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: stop
+                            text: 'Sesam Stop'
+                            on_release: root.command_thread("stop")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_stop
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: run
+                            text: 'Sesam Run'
+                            on_release: root.command_thread("run")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_run
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: wipe
+                            text: 'Sesam Wipe'
+                            on_release: root.command_thread("wipe")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_wipe
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: restart
+                            text: 'Sesam Restart'
+                            on_release: root.command_thread("restart")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_restart
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: reset
+                            text: 'Sesam Reset'
+                            on_release: root.command_thread("reset")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_reset
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: convert
+                            text: 'Sesam Convert'
+                            on_release: root.command_thread("convert")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_convert
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+                        OneLineAvatarIconListItem:
+                            id: dump
+                            text: 'Sesam Dump'
+                            on_release: root.command_thread("dump")
+                            IconLeftWidget:
+                                icon: 'apple-keyboard-command'
+                            IconRightWidget:
+                                theme_text_color: 'Custom'
+                                text_color: "white"
+                                MDSpinner:
+                                    id: spinner_dump
+                                    size_hint: None, None
+                                    size: dp(20), dp(20)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    active: False
+        MDBottomNavigationItem:
+            id: logs
+            name: 'logs'
+            icon: 'file-document-alert-outline'
+            on_tab_press: root.get_logs()
+            ScrollView:
+                id: scroll_log
+                MDTextField:
+                    id: log
+                    multiline: True
+                    readonly: True
+                    size_hint_y: None
+                    height: self.minimum_height
+            MDLabel:
+                id: output
+                halign: 'center'
+                mode:"rectangle"
+#        MDLabel:
+#            id: output
+#            halign: 'center'
+#            mode:"rectangle"
+    MDScreenManager:
+        MDScreen:
+            MDNavigationDrawer:
+                id: nav_drawer
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: '8dp'
+                    padding: '8dp'
+                    Image:
+                        source: 'assets/images/sesam_logo.png'
+                        size_hint: (1, None)
+                        height: Window.height * 0.3
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    ScrollView:
+                        MDList:
+                            OneLineIconListItem:
+                                text: 'Commands'
+                                on_release:
+                                    nav_drawer.set_state('close')
+                                    app.switch_window('command_screen')
+                                    # app.root.current = 'command_screen'
+                                    # app.root.manager.transition.direction = "left"
+                                IconLeftWidget:
+                                    icon: 'apple-keyboard-command'
+                            OneLineIconListItem:
+                                text: 'Connectors'
+                                on_release:
+                                    nav_drawer.set_state('close')
+                                    app.switch_window('connector_screen')
+                                    #app.root.current = 'connector_screen'
+                                    # call test function
+                                    # root.set_up_connectors()
+                                IconLeftWidget:
+                                    icon: 'connection'
+                            OneLineIconListItem:
+                                text: 'Configs'
+                                on_release:
+                                    nav_drawer.set_state('close')
+                                    app.switch_window('config_screen')
+                                    #app.root.current = 'config_screen'
+                                IconLeftWidget:
+                                    icon: 'cogs'
+                            OneLineIconListItem:
+                                text: 'Exit'
+                                on_release: app.stop()
+                                IconLeftWidget:
+                                    icon: 'exit-to-app'
+
+                    MDLabel:
+                        text: 'v.1.0.0'
+                        font_style: 'Caption'
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: 'center'

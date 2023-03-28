@@ -1,3 +1,6 @@
 kivy==2.1.0
-kivymd==1.0.2
+kivymd==1.1.1
 watchdog
+pillow==9.4.0
+gitpython==3.1.31
+dulwich==0.21.3

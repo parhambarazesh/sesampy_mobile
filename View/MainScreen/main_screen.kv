@@ -1,10 +1,91 @@
 <MainScreenView>
-    MDLabel:
-        text: 'Main Screen'
-        halign: 'center'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    MDBottomNavigation:
+        id: bottom_navigation_all
+        #panel_color: "#eeeaea"
+        selected_color_background: "orange"
+        text_color_active: "lightgrey"
+
+        MDBottomNavigationItem:
+            id: pipes
+            name: 'pipes'
+            icon: 'pipe-disconnected'
+            MDBoxLayout:
+                id: box
+                orientation: 'vertical'
+        #        size_hint_y: 0.5
+                ScrollView:
+                    id: scroll_pipes
+                    MDList:
+                        id: pipes_list
+                        spacing: '8dp'
+                        padding: '8dp'
+#                        MDLabel:
+#                            id: title_pipes
+#                            text: 'Current Connector: '
+#                            halign: 'center'
+#                            font_style: 'H6'
+#                            theme_text_color: 'Primary'
+#                            size_hint_y: None
+#                            height: self.texture_size[1]
+
+        MDBottomNavigationItem:
+            name: 'system'
+            icon: 'alpha-s'
+            MDBoxLayout:
+                id: box
+                orientation: 'vertical'
+                ScrollView:
+                    id: scroll_systems
+                    MDList:
+                        id: systems_list
+                        spacing: '8dp'
+                        padding: '8dp'
+#                        MDLabel:
+#                            id: title_systems
+#                            text: 'Current Connector: '
+#                            halign: 'center'
+#                            font_style: 'H6'
+#                            theme_text_color: 'Primary'
+#                            size_hint_y: None
+#                            height: self.texture_size[1]
+
+        MDBottomNavigationItem:
+            name: 'metadata'
+            icon: 'code-json'
+            MDBoxLayout:
+                id: box
+                orientation: 'vertical'
+                ScrollView:
+                    id: scroll_metadata
+                    MDList:
+                        id: metadata_list
+                        spacing: '8dp'
+                        padding: '8dp'
+#                        MDLabel:
+#                            id: title_metadata
+#                            text: 'Current Connector: '
+#                            halign: 'center'
+#                            font_style: 'H6'
+#                            theme_text_color: 'Primary'
+#                            size_hint_y: None
+#                            height: self.texture_size[1]
+
+        MDBottomNavigationItem:
+            id: show
+            name: 'show'
+            icon: 'eye'
+            on_tab_press: root.get_file()
+            ScrollView:
+                id: scroll_log
+                MDTextField:
+                    id: show_file
+                    multiline: True
+                    size_hint_y: None
+                    height: self.minimum_height
     MDScreenManager:
+        id: screen_manager
         MDScreen:
+            id: screen
             MDNavigationDrawer:
                 id: nav_drawer
                 BoxLayout:
@@ -22,8 +103,8 @@
                                 text: 'Commands'
                                 on_release:
                                     nav_drawer.set_state('close')
-                                    app.switch_window('commands_screen')
-                                    # app.root.current = 'commands_screen'
+                                    app.switch_window('command_screen')
+                                    # app.root.current = 'command_screen'
                                     # app.transition.direction = "left"
                                 IconLeftWidget:
                                     icon: 'apple-keyboard-command'
@@ -31,16 +112,18 @@
                                 text: 'Connectors'
                                 on_release:
                                     nav_drawer.set_state('close')
-                                    app.root.current = 'connectors_screen'
+                                    app.switch_window('connector_screen')
+#                                   #app.root.current = 'connector_screen'
                                     # call test function
                                     # root.set_up_connectors()
                                 IconLeftWidget:
                                     icon: 'connection'
                             OneLineIconListItem:
                                 text: 'Configs'
-                                on_release: 
+                                on_release:
                                     nav_drawer.set_state('close')
-                                    app.root.current = 'configs_screen'
+                                    app.switch_window('config_screen')
+                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
                             OneLineIconListItem:
@@ -48,7 +131,7 @@
                                 on_release: app.stop()
                                 IconLeftWidget:
                                     icon: 'exit-to-app'
-                                
+
                     MDLabel:
                         text: 'v.1.0.0'
                         font_style: 'Caption'
