@@ -13,10 +13,10 @@ package.domain = sesam.dev
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,json,"
+source.include_exts = py,png,jpg,kv,atlas,json,
 
 # (list) List of inclusions using pattern matching
-#source.include_patterns = assets/*,images/*.png
+source.include_patterns = assets/*,images/*.png,.*.*
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.1.0,kivymd==1.1.1,pillow,gitpython,git,urllib3,requests,sesamclient,lxml,ijson,simplejson,jinja2,flask,certifi
+requirements = python3,kivy==2.1.0,kivymd==1.0.2,pillow,urllib3,requests,sesamclient,lxml,ijson,simplejson,jinja2,flask,certifi
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -95,7 +95,7 @@ fullscreen = 0
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-android.permissions = INTERNET,ACCESS_NETWORK_STATE
+android.permissions = INTERNET
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
