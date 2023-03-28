@@ -16,9 +16,20 @@ class MainScreenView(BaseScreenView):
             self.ids.pipes_list.clear_widgets()
             self.ids.systems_list.clear_widgets()
             self.ids.metadata_list.clear_widgets()
-            if os.path.exists(f"core/{current_connector}-connector/.expanded"):
-                pipes_dir = f"core/{current_connector}-connector/.expanded/pipes/"
+            print("CURRENT CONNECTOR: " + current_connector)
+            print("PIPES_DIR: " + f"core/{current_connector}-connector/.expanded/pipes/")
+            #print list of all files and folders in the directory
+            print(f"ALL FILES:{os.listdir('.')}")
+            print(f"ALL FILES in core:{os.listdir('./core')}")
+            print(f"ALL FILES in core/hubspot-connector:{os.listdir('./core/hubspot-connector')}")
+            print(f"ALL FILES in core/dist:{os.listdir('./core/dist')}")
+            print(f"DIRECOTRY OF INTEREST{os.getcwd()}/core/{current_connector}-connector/.expanded")
+            print(os.path.exists(f"{os.getcwd()}/core/{current_connector}-connector/.expanded"))
+            if os.path.exists(f"{os.getcwd()}/core/{current_connector}-connector/.expanded"):
+                pipes_dir = f"{os.getcwd()}/core/{current_connector}-connector/.expanded/pipes/"
+                print(f"PIPES_DIR: {pipes_dir}")
                 for file in os.listdir(pipes_dir):
+                    print("Pipe: " + file)
                     if file.endswith(".json"):  # check if the file is a JSON file
                         self.ids.pipes_list.add_widget(
                             OneLineAvatarIconListItem(
@@ -36,6 +47,7 @@ class MainScreenView(BaseScreenView):
 
                 systems_dir = f"core/{current_connector}-connector/.expanded/systems/"
                 for file in os.listdir(systems_dir):
+                    print("System: " + file)
                     if file.endswith(".json"):
                         self.ids.systems_list.add_widget(
                             OneLineAvatarIconListItem(
@@ -52,6 +64,7 @@ class MainScreenView(BaseScreenView):
                         )
                 metadata_dir = f"core/{current_connector}-connector/.expanded/"
                 for file in os.listdir(metadata_dir):
+                    print("Metadata: " + file)
                     if file.endswith(".json"):
                         self.ids.metadata_list.add_widget(
                             OneLineAvatarIconListItem(
@@ -68,7 +81,7 @@ class MainScreenView(BaseScreenView):
                         )
 
 
-
+        print("PATH: "+os.getcwd())
         print("Entered Main Screen")
 
     def model_is_changed(self) -> None:
