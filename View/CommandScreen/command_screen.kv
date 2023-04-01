@@ -10,6 +10,14 @@
             MDBoxLayout:
                 id: box
                 orientation: 'vertical'
+                MDLabel:
+                    id: command
+                    text: 'Commands'
+                    halign: 'center'
+                    font_style: 'H6'
+                    theme_text_color: 'Primary'
+                    size_hint_y: None
+                    height: self.texture_size[1]
         #        size_hint_y: 0.5
                 ScrollView:
                     id: scroll
@@ -17,18 +25,11 @@
                         id: command_list
                         spacing: '8dp'
                         padding: '8dp'
-                        MDLabel:
-                            id: command
-                            text: 'Commands'
-                            halign: 'center'
-                            font_style: 'H6'
-                            theme_text_color: 'Primary'
-                            size_hint_y: None
-                            height: self.texture_size[1]
+
                         OneLineAvatarIconListItem:
                             id: authenticate
                             text: 'Sesam Authenticate'
-                            on_release: root.command_thread("authenticate")
+                            on_release: root.authenticate_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -43,7 +44,7 @@
                         OneLineAvatarIconListItem:
                             id: download
                             text: 'Sesam Download'
-                            on_release: root.command_thread("download")
+                            on_release: root.download_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -59,7 +60,7 @@
                         OneLineAvatarIconListItem:
                             id: upload
                             text: 'Sesam Upload'
-                            on_release: root.command_thread("upload")
+                            on_release: root.upload_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -74,7 +75,7 @@
                         OneLineAvatarIconListItem:
                             id: status
                             text: 'Sesam Status'
-                            on_release: root.command_thread("status")
+                            on_release: root.status_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -89,7 +90,7 @@
                         OneLineAvatarIconListItem:
                             id: verify
                             text: 'Sesam Verify'
-                            on_release: root.command_thread("verify")
+                            on_release: root.verify_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -104,7 +105,7 @@
                         OneLineAvatarIconListItem:
                             id: test
                             text: 'Sesam Test'
-                            on_release: root.command_thread("test")
+                            on_release: root.test_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -119,7 +120,7 @@
                         OneLineAvatarIconListItem:
                             id: stop
                             text: 'Sesam Stop'
-                            on_release: root.command_thread("stop")
+                            on_release: root.stop_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -134,7 +135,7 @@
                         OneLineAvatarIconListItem:
                             id: run
                             text: 'Sesam Run'
-                            on_release: root.command_thread("run")
+                            on_release: root.run_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -149,7 +150,7 @@
                         OneLineAvatarIconListItem:
                             id: wipe
                             text: 'Sesam Wipe'
-                            on_release: root.command_thread("wipe")
+                            on_release: root.wipe_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -164,7 +165,7 @@
                         OneLineAvatarIconListItem:
                             id: restart
                             text: 'Sesam Restart'
-                            on_release: root.command_thread("restart")
+                            on_release: root.restart_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -179,7 +180,7 @@
                         OneLineAvatarIconListItem:
                             id: reset
                             text: 'Sesam Reset'
-                            on_release: root.command_thread("reset")
+                            on_release: root.reset_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -194,7 +195,7 @@
                         OneLineAvatarIconListItem:
                             id: convert
                             text: 'Sesam Convert'
-                            on_release: root.command_thread("convert")
+                            on_release: root.convert_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
@@ -209,7 +210,7 @@
                         OneLineAvatarIconListItem:
                             id: dump
                             text: 'Sesam Dump'
-                            on_release: root.command_thread("dump")
+                            on_release: root.dump_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
                             IconRightWidget:
