@@ -24,7 +24,7 @@ class MainScreenController:
     def __init__(self, model):
         self.model = model  # Model.main_screen.MainScreenModel
         self.view = View.MainScreen.main_screen.MainScreenView(controller=self, model=self.model)
-        current_connector = model.current_connector
+        # current_connector = model.current_connector
         # self.view.ids.title_pipes.text = "Active Connector: " + current_connector
         # self.view.ids.title_systems.text = "Active Connector: " + current_connector
         # self.view.ids.title_metadata.text = "Active Connector: " + current_connector
