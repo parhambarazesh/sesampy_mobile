@@ -3,6 +3,15 @@
         id: box
         orientation: 'vertical'
         halign: 'center'
+        spacing: '8dp'
+        padding: '8dp'
+        MDLabel:
+            text: 'Connectors'
+            halign: 'center'
+            font_style: 'H6'
+            theme_text_color: 'Primary'
+            size_hint_y: None
+            height: self.texture_size[1]
         ScrollView:
             id: connector_list_view
             spacing: '8dp'
@@ -13,13 +22,7 @@
                 padding: '8dp'
                 spacing: '8dp'
                 halign: 'center'
-                MDLabel:
-                    text: 'Connectors'
-                    halign: 'center'
-                    font_style: 'H6'
-                    theme_text_color: 'Primary'
-                    size_hint_y: None
-                    height: self.texture_size[1]
+
         MDLabel:
             id: connector_label
             font_style: 'H6'
