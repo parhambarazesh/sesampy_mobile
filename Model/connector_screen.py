@@ -13,6 +13,8 @@ class ConnectorScreenModel(BaseScreenModel):
         'Add Connector': 'connection',
     }
 
+    current_connector = ""
+
     connectors_list = [
         ('tripletex', 'https://github.com/sesam-io/tripletex-connector'),
         ('hubspot', 'https://github.com/sesam-io/hubspot-connector'),
