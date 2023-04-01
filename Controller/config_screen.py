@@ -32,30 +32,8 @@ class ConfigScreenController:
         speed_dial.data = self.speed_dial_data
         speed_dial.root_button_anim = True
         speed_dial.callback = self.callback_for_menu_items
-        if not os.path.exists(os.path.join(os.getcwd(),"core/.syncconfig")):
-            open("core/.syncconfig", 'a').close()
-        if not os.path.exists(os.path.join(os.getcwd(),"core/.authconfig")):
-            open("core/.authconfig", 'a').close()
-
-        with open(os.path.join(os.getcwd(),"core/.syncconfig"), "r") as f:
-            content = f.read()
-            if content != "":
-                key_value_pairs = [line.strip().split('=', 1) for line in content.splitlines()]
-                obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
-                self.view.ids.node_url.text = obj['NODE']
-                self.view.ids.node_jwt_token.text = obj['JWT']
-        with open(os.path.join(os.getcwd(),"core/.authconfig"), "r") as f:
-            content = f.read()
-            if content != "":
-                key_value_pairs = [line.strip().split('=', 1) for line in content.splitlines()]
-                obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
-                if "CLIENT_ID" in obj and "CLIENT_SECRET" in obj:
-                    self.view.ids.oauth2_client_id.text = obj['CLIENT_ID']
-                    self.view.ids.oauth2_client_secret.text = obj['CLIENT_SECRET']
-                elif "CONSUMER_TOKEN" in obj and "EMPLOYEE_TOKEN" in obj:
-                    self.view.ids.tripletex_consumer_token.text = obj['CONSUMER_TOKEN']
-                    self.view.ids.tripletex_employee_token.text = obj['EMPLOYEE_TOKEN']
         self.view.add_widget(speed_dial)
+
 
     def get_view(self) -> View.ConfigScreen.config_screen:
         return self.view
