@@ -2,6 +2,7 @@
     MDBoxLayout:
         id: box
         orientation: 'vertical'
+        padding: '8dp'
         ScrollView:
             id: scroll
             MDList:
@@ -15,42 +16,81 @@
                     theme_text_color: 'Primary'
                     size_hint_y: None
                     height: self.texture_size[1]
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 MDTextField:
                     id: node_url
                     hint_text: "Node URL"
-                    mode: "round"
-                    icon_left: "pipe-disconnected"
+                    mode: "rectangle"
+                    icon_left: "cogs"
+                    icon_left_color_normal: "blue"
+                    icon_left_color_focus: "blue"
                     readonly: True
+                    theme_text_color: 'Custom'
+                    line_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    hint_text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 MDTextField:
                     id: node_jwt_token
                     hint_text: "Node JWT token"
-                    mode: "round"
-                    icon_left: "pipe-disconnected"
+                    mode: "rectangle"
+                    icon_left: "cogs"
+                    icon_left_color_normal: "blue"
+                    icon_left_color_focus: "blue"
                     readonly: True
+                    theme_text_color: 'Custom'
+                    line_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    hint_text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 MDTextField:
                     id: oauth2_client_id
                     hint_text: "OAuth2 Client ID"
-                    mode: "round"
-                    icon_left: "connection"
+                    mode: "rectangle"
+                    icon_left: "cogs"
+                    icon_left_color_normal: "blue"
+                    icon_left_color_focus: "blue"
                     readonly: True
+                    theme_text_color: 'Custom'
+                    line_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    hint_text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 MDTextField:
                     id: oauth2_client_secret
                     hint_text: "OAuth2 Client Secret"
-                    mode: "round"
-                    icon_left: "connection"
+                    mode: "rectangle"
+                    icon_left: "cogs"
+                    icon_left_color_normal: "blue"
+                    icon_left_color_focus: "blue"
                     readonly: True
+                    theme_text_color: 'Custom'
+                    line_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    hint_text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 MDTextField:
                     id: tripletex_consumer_token
                     hint_text: "Tripletex Consumer Token"
-                    mode: "round"
-                    icon_left: "alpha-t"
+                    mode: "rectangle"
+                    icon_left: "cogs"
+                    icon_left_color_normal: "blue"
+                    icon_left_color_focus: "blue"
                     readonly: True
+                    theme_text_color: 'Custom'
+                    line_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    hint_text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 MDTextField:
                     id: tripletex_employee_token
                     hint_text: "Tripletex Employee Token"
-                    mode: "round"
-                    icon_left: "alpha-t"
+                    mode: "rectangle"
+                    icon_left: "cogs"
+                    icon_left_color_normal: "blue"
+                    icon_left_color_focus: "blue"
                     readonly: True
+                    theme_text_color: 'Custom'
+                    line_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    hint_text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+
 
     MDScreenManager:
         MDScreen:
@@ -69,36 +109,46 @@
                         MDList:
                             OneLineIconListItem:
                                 text: 'Commands'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('command_screen')
-                                    # app.root.current = 'command_screen'
-                                    # app.root.manager.transition.direction = "left"
                                 IconLeftWidget:
                                     icon: 'apple-keyboard-command'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Connectors'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('connector_screen')
-                                    #app.root.current = 'connector_screen'
-                                    # call test function
-                                    # root.set_up_connectors()
                                 IconLeftWidget:
                                     icon: 'connection'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Configs'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('config_screen')
-                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Exit'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release: app.stop()
                                 IconLeftWidget:
                                     icon: 'exit-to-app'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
 
                     MDLabel:
                         text: 'v.1.0.0'
@@ -106,3 +156,5 @@
                         size_hint_y: None
                         height: self.texture_size[1]
                         halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
