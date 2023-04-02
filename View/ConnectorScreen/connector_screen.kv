@@ -12,6 +12,8 @@
             theme_text_color: 'Primary'
             size_hint_y: None
             height: self.texture_size[1]
+            theme_text_color: 'Custom'
+            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
         ScrollView:
             id: connector_list_view
             spacing: '8dp'
@@ -23,10 +25,54 @@
                 spacing: '8dp'
                 halign: 'center'
 
-        MDLabel:
+        MDBoxLayout:
             id: connector_label
             font_style: 'H6'
             halign: 'center'
+            MDList:
+                id: list_info
+                spacing: '8dp'
+                padding: '8dp'
+                MDLabel:
+                    text: 'Connector Panel Info'
+                    halign: 'center'
+                    font_style: 'H6'
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                OneLineIconListItem:
+                    text: 'Active Connector'
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    IconLeftWidget:
+                        icon: 'cog'
+                        theme_text_color: "Custom"
+                        text_color: "gold"
+                OneLineIconListItem:
+                    text: 'Not Active Connector'
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    IconLeftWidget:
+                        icon: 'cog'
+                        theme_text_color: "Custom"
+                        text_color: "blue"
+                OneLineIconListItem:
+                    text: 'Download Connector'
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    IconLeftWidget:
+                        icon: 'download'
+                        theme_text_color: "Custom"
+                        text_color: "blue"
+                OneLineIconListItem:
+                    text: 'Delete Connector'
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+                    IconLeftWidget:
+                        icon: 'delete'
+                        theme_text_color: "Custom"
+                        text_color: "red"
 
 
     MDScreenManager:
@@ -46,36 +92,46 @@
                         MDList:
                             OneLineIconListItem:
                                 text: 'Commands'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('command_screen')
-                                    # app.root.current = 'command_screen'
-                                    # app.root.manager.transition.direction = "left"
                                 IconLeftWidget:
                                     icon: 'apple-keyboard-command'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Connectors'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('connector_screen')
-                                    #app.root.current = 'connector_screen'
-                                    # call test function
-                                    # root.set_up_connectors()
                                 IconLeftWidget:
                                     icon: 'connection'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Configs'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('config_screen')
-                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Exit'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release: app.stop()
                                 IconLeftWidget:
                                     icon: 'exit-to-app'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
 
                     MDLabel:
                         text: 'v.1.0.0'
@@ -83,3 +139,5 @@
                         size_hint_y: None
                         height: self.texture_size[1]
                         halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
