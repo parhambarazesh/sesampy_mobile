@@ -15,26 +15,29 @@
                     text: 'Commands'
                     halign: 'center'
                     font_style: 'H6'
-                    theme_text_color: 'Primary'
                     size_hint_y: None
                     height: self.texture_size[1]
-        #        size_hint_y: 0.5
+                    theme_text_color: 'Custom'
+                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                 ScrollView:
                     id: scroll
                     MDList:
                         id: command_list
                         spacing: '8dp'
                         padding: '8dp'
-
                         OneLineAvatarIconListItem:
                             id: authenticate
                             text: 'Sesam Authenticate'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.authenticate_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_authenticate
                                     size_hint: None, None
@@ -44,12 +47,16 @@
                         OneLineAvatarIconListItem:
                             id: download
                             text: 'Sesam Download'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.download_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_download
                                     size_hint: None, None
@@ -60,12 +67,16 @@
                         OneLineAvatarIconListItem:
                             id: upload
                             text: 'Sesam Upload'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.upload_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_upload
                                     size_hint: None, None
@@ -75,12 +86,16 @@
                         OneLineAvatarIconListItem:
                             id: status
                             text: 'Sesam Status'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.status_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_status
                                     size_hint: None, None
@@ -90,12 +105,16 @@
                         OneLineAvatarIconListItem:
                             id: verify
                             text: 'Sesam Verify'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.verify_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_verify
                                     size_hint: None, None
@@ -105,12 +124,16 @@
                         OneLineAvatarIconListItem:
                             id: test
                             text: 'Sesam Test'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.test_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_test
                                     size_hint: None, None
@@ -120,12 +143,16 @@
                         OneLineAvatarIconListItem:
                             id: stop
                             text: 'Sesam Stop'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.stop_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_stop
                                     size_hint: None, None
@@ -135,12 +162,16 @@
                         OneLineAvatarIconListItem:
                             id: run
                             text: 'Sesam Run'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.run_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_run
                                     size_hint: None, None
@@ -150,12 +181,16 @@
                         OneLineAvatarIconListItem:
                             id: wipe
                             text: 'Sesam Wipe'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.wipe_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_wipe
                                     size_hint: None, None
@@ -165,12 +200,16 @@
                         OneLineAvatarIconListItem:
                             id: restart
                             text: 'Sesam Restart'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.restart_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_restart
                                     size_hint: None, None
@@ -180,12 +219,16 @@
                         OneLineAvatarIconListItem:
                             id: reset
                             text: 'Sesam Reset'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.reset_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_reset
                                     size_hint: None, None
@@ -195,12 +238,16 @@
                         OneLineAvatarIconListItem:
                             id: convert
                             text: 'Sesam Convert'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.convert_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_convert
                                     size_hint: None, None
@@ -210,12 +257,16 @@
                         OneLineAvatarIconListItem:
                             id: dump
                             text: 'Sesam Dump'
+                            theme_text_color: 'Custom'
+                            text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             on_release: root.dump_thread()
                             IconLeftWidget:
                                 icon: 'apple-keyboard-command'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             IconRightWidget:
                                 theme_text_color: 'Custom'
-                                text_color: "white"
+                                text_color: (18/255,18/255,18/255,1) if self.theme_cls.theme_style == "Dark" else (250/255,250/255,250/255,1)
                                 MDSpinner:
                                     id: spinner_dump
                                     size_hint: None, None
@@ -235,6 +286,7 @@
                     readonly: True
                     size_hint_y: None
                     height: self.minimum_height
+                    text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
             MDLabel:
                 id: output
                 halign: 'center'
@@ -260,36 +312,46 @@
                         MDList:
                             OneLineIconListItem:
                                 text: 'Commands'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('command_screen')
-                                    # app.root.current = 'command_screen'
-                                    # app.root.manager.transition.direction = "left"
                                 IconLeftWidget:
                                     icon: 'apple-keyboard-command'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Connectors'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('connector_screen')
-                                    #app.root.current = 'connector_screen'
-                                    # call test function
-                                    # root.set_up_connectors()
                                 IconLeftWidget:
                                     icon: 'connection'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Configs'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('config_screen')
-                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Exit'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release: app.stop()
                                 IconLeftWidget:
                                     icon: 'exit-to-app'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
 
                     MDLabel:
                         text: 'v.1.0.0'
@@ -297,3 +359,5 @@
                         size_hint_y: None
                         height: self.texture_size[1]
                         halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
