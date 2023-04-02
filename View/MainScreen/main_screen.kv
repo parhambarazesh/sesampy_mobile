@@ -1,10 +1,8 @@
 <MainScreenView>
     MDBottomNavigation:
         id: bottom_navigation_all
-        #panel_color: "#eeeaea"
         selected_color_background: "orange"
         text_color_active: "lightgrey"
-
         MDBottomNavigationItem:
             id: pipes
             name: 'pipes'
@@ -12,22 +10,12 @@
             MDBoxLayout:
                 id: box
                 orientation: 'vertical'
-        #        size_hint_y: 0.5
                 ScrollView:
                     id: scroll_pipes
                     MDList:
                         id: pipes_list
                         spacing: '8dp'
                         padding: '8dp'
-#                        MDLabel:
-#                            id: title_pipes
-#                            text: 'Current Connector: '
-#                            halign: 'center'
-#                            font_style: 'H6'
-#                            theme_text_color: 'Primary'
-#                            size_hint_y: None
-#                            height: self.texture_size[1]
-
         MDBottomNavigationItem:
             name: 'system'
             icon: 'alpha-s'
@@ -40,15 +28,6 @@
                         id: systems_list
                         spacing: '8dp'
                         padding: '8dp'
-#                        MDLabel:
-#                            id: title_systems
-#                            text: 'Current Connector: '
-#                            halign: 'center'
-#                            font_style: 'H6'
-#                            theme_text_color: 'Primary'
-#                            size_hint_y: None
-#                            height: self.texture_size[1]
-
         MDBottomNavigationItem:
             name: 'metadata'
             icon: 'code-json'
@@ -61,27 +40,52 @@
                         id: metadata_list
                         spacing: '8dp'
                         padding: '8dp'
-#                        MDLabel:
-#                            id: title_metadata
-#                            text: 'Current Connector: '
-#                            halign: 'center'
-#                            font_style: 'H6'
-#                            theme_text_color: 'Primary'
-#                            size_hint_y: None
-#                            height: self.texture_size[1]
-
         MDBottomNavigationItem:
             id: show
             name: 'show'
             icon: 'eye'
             on_tab_press: root.get_file()
-            ScrollView:
-                id: scroll_log
-                MDTextField:
-                    id: show_file
-                    multiline: True
-                    size_hint_y: None
-                    height: self.minimum_height
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: '16dp'  # Add spacing between the two MDBoxLayouts
+                MDBoxLayout:
+                    id: box
+                    orientation: 'vertical'
+                    padding: '8dp'
+                    size_hint: 1, 0.9
+                    ScrollView:
+                        id: scroll_log
+                        MDTextField:
+                            id: show_file
+                            multiline: True
+                            size_hint_y: None
+                            height: self.minimum_height
+                            text_color_normal: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+
+                MDBoxLayout:
+                    id: edit_box
+                    orientation: 'horizontal'
+                    size_hint: 1, 0.1
+                    spacing: '16dp'
+                    padding: '8dp'
+                    halign: 'center'
+                    MDRectangleFlatIconButton:
+                        text: "Reset"
+                        icon: "thumb-down"
+                        line_color: 0, 0, 0, 0
+                        pos_hint: {"center_x": 0, "center_y": 0.5}
+                        on_release: root.reset_file()
+                    MDRectangleFlatIconButton:
+                        text: "Save"
+                        icon: "thumb-up"
+                        line_color: 0, 0, 0, 0
+                        pos_hint: {"center_x": 1, "center_y": .5}
+                        on_release: root.save_file()
+    MDProgressBar:
+        id: progress_bar
+        orientation: "horizontal"
+        value: 0
+
     MDScreenManager:
         id: screen_manager
         MDScreen:
@@ -101,36 +105,46 @@
                         MDList:
                             OneLineIconListItem:
                                 text: 'Commands'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('command_screen')
-                                    # app.root.current = 'command_screen'
-                                    # app.transition.direction = "left"
                                 IconLeftWidget:
                                     icon: 'apple-keyboard-command'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Connectors'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('connector_screen')
-#                                   #app.root.current = 'connector_screen'
-                                    # call test function
-                                    # root.set_up_connectors()
                                 IconLeftWidget:
                                     icon: 'connection'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Configs'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release:
                                     nav_drawer.set_state('close')
                                     app.switch_window('config_screen')
-                                    #app.root.current = 'config_screen'
                                 IconLeftWidget:
                                     icon: 'cogs'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                             OneLineIconListItem:
                                 text: 'Exit'
+                                theme_text_color: 'Custom'
+                                text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
                                 on_release: app.stop()
                                 IconLeftWidget:
                                     icon: 'exit-to-app'
+                                    theme_text_color: 'Custom'
+                                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
 
                     MDLabel:
                         text: 'v.1.0.0'
@@ -138,3 +152,5 @@
                         size_hint_y: None
                         height: self.texture_size[1]
                         halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
