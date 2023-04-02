@@ -11,27 +11,30 @@ from kivymd.uix.button import MDFloatingActionButtonSpeedDial, MDFlatButton
 
 class ConfigScreenView(BaseScreenView):
     def on_pre_leave(self, *args):
+        self.ids.box.parent.remove_widget(self.speed_dial)
         os.chdir(ROOT_DIR)
 
     def on_pre_enter(self, *args):
-        self.speed_dial = MDFloatingActionButtonSpeedDial()
         self.data = {
-        'Node Config': [
-            'pipe-disconnected',
-            "on_release", self.callback_for_menu_items
-        ],
-        'OAth2 Config': [
-            'connection',
-            "on_release", self.callback_for_menu_items
-        ],
-        'Tripletex Config': [
-            'alpha-t',
-            "on_release", self.callback_for_menu_items
-        ],
-    }
-        self.speed_dial.data = self.data
-        self.speed_dial.root_button_anim = True
-        # self.speed_dial.on_release_stack_button = self.callback_for_menu_items
+            "Node Config": [
+                "pipe-disconnected",
+                "on_release", self.callback_for_menu_items,
+            ],
+            "OAth2 Config": [
+                "connection",
+                "on_release", self.callback_for_menu_items
+            ],
+            "Tripletex Config": [
+                "alpha-t",
+                "on_release", self.callback_for_menu_items
+            ],
+        }
+        self.speed_dial = MDFloatingActionButtonSpeedDial(
+            id="speed_dial",
+            data=self.data,
+            root_button_anim=True,
+            label_text_color=self.theme_cls.primary_color,
+        )
         self.ids.box.parent.add_widget(self.speed_dial)
 
     def on_enter(self, *args):
