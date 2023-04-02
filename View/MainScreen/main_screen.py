@@ -1,5 +1,13 @@
 import json
+import threading
 from functools import partial
+
+from kivy.clock import mainthread, Clock
+from kivy.metrics import dp
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.spinner import MDSpinner
+
 from Model.connector_screen import ConnectorScreenModel as connector_model
 from kivymd.uix.list import OneLineAvatarIconListItem, IconLeftWidget
 from View.base_screen import BaseScreenView
@@ -11,6 +19,11 @@ from constants import ROOT_DIR
 class MainScreenView(BaseScreenView):
     def on_pre_leave(self, *args):
         os.chdir(ROOT_DIR)
+
+    def on_pre_enter(self, *args):
+        if connector_model.current_connector!="":
+            if os.path.exists(f"{connector_model.current_connector}-connector/.expanded"):
+                self.ids.progress_bar.value = 30
     def on_enter(self, *args):
         os.chdir("core")
         current_connector = connector_model.current_connector
@@ -42,7 +55,7 @@ class MainScreenView(BaseScreenView):
                                 id=f"pipe_item_{file}",
                             )
                         )
-
+                self.ids.progress_bar.value = 40
                 systems_dir = f"{current_connector}-connector/.expanded/systems/"
                 for file in os.listdir(systems_dir):
                     print("System: " + file)
@@ -60,6 +73,7 @@ class MainScreenView(BaseScreenView):
                                 id=f"system_item_{file}",
                             )
                         )
+                self.ids.progress_bar.value = 80
                 metadata_dir = f"{current_connector}-connector/.expanded/"
                 for file in os.listdir(metadata_dir):
                     print("Metadata: " + file)
@@ -77,8 +91,7 @@ class MainScreenView(BaseScreenView):
                                 id=f"metadata_item_{file}",
                             )
                         )
-
-
+                self.ids.progress_bar.value = 100
         print("PATH: "+os.getcwd())
         print("Entered Main Screen")
 
@@ -104,19 +117,65 @@ class MainScreenView(BaseScreenView):
         self.ids.show.badge_icon = ""
 
     def open_pipe(self, file, *args):
+        self.selected_file = f"{connector_model.current_connector}-connector/.expanded/{file}"
         with open(f"{connector_model.current_connector}-connector/.expanded/pipes/{file}", "r") as f:
             data = json.load(f)
         self.ids.show.badge_icon = "numeric-1"
         self.ids.show_file.text = json.dumps(data, indent=4)
 
     def open_system(self, file, *args):
+        self.selected_file = f"{connector_model.current_connector}-connector/.expanded/{file}"
         with open(f"{connector_model.current_connector}-connector/.expanded/systems/{file}", "r") as f:
             data = json.load(f)
         self.ids.show.badge_icon = "numeric-1"
         self.ids.show_file.text = json.dumps(data, indent=4)
 
     def open_metadata(self, file, *args):
+        self.selected_file = f"{connector_model.current_connector}-connector/.expanded/{file}"
         with open(f"{connector_model.current_connector}-connector/.expanded/{file}", "r", encoding="utf-8-sig") as f:
             data = json.load(f)
         self.ids.show.badge_icon = "numeric-1"
         self.ids.show_file.text = json.dumps(data, indent=4)
+
+    def save_file(self, *args):
+        try:
+            with open(self.selected_file, "w") as f:
+                json.dump(json.loads(self.ids.show_file.text), f, indent=4)
+        except:
+            # show a dialog
+            dialog = MDDialog(
+                title="Cannot save file",
+                text="Invalid json format",
+                size_hint=(0.7, 1),
+                buttons=[
+                    MDFlatButton(
+                        text="Ok",
+                        # theme_text_color="Custom",
+                        # text_color=self.theme_cls.primary_color,
+                        on_release=lambda x: dialog.dismiss(),
+                    ),
+                ],
+            )
+            dialog.open()
+
+    def reset_file(self, *args):
+        try:
+            with open(self.selected_file, "r") as f:
+                data = json.load(f)
+            self.ids.show_file.text = json.dumps(data, indent=4)
+        except:
+            # show a dialog
+            dialog = MDDialog(
+                title="Cannot reset file",
+                text="Invalid json format",
+                size_hint=(0.7, 1),
+                buttons=[
+                    MDFlatButton(
+                        text="Ok",
+                        # theme_text_color="Custom",
+                        # text_color=self.theme_cls.primary_color,
+                        on_release=lambda x: dialog.dismiss(),
+                    ),
+                ],
+            )
+            dialog.open()
