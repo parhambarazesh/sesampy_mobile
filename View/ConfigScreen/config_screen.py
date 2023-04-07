@@ -1,5 +1,7 @@
+from kivymd.toast import toast
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.textfield import MDTextField
 
 from View.base_screen import BaseScreenView
@@ -15,6 +17,13 @@ class ConfigScreenView(BaseScreenView):
         os.chdir(ROOT_DIR)
 
     def on_pre_enter(self, *args):
+        self.manager_open = False
+        self.file_manager = MDFileManager(
+            exit_manager=self.exit_manager,
+            select_path=self.select_path,
+            show_hidden_files=True,
+            # ext=[".txt", ".pdf", ".doc"],
+        )
         self.data = {
             "Node Config": [
                 "pipe-disconnected",
@@ -27,6 +36,10 @@ class ConfigScreenView(BaseScreenView):
             "Tripletex Config": [
                 "alpha-t",
                 "on_release", self.callback_for_menu_items
+            ],
+            "Import": [
+                "import",
+                "on_release", self.file_manager_open
             ],
         }
         self.speed_dial = MDFloatingActionButtonSpeedDial(
@@ -94,6 +107,11 @@ class ConfigScreenView(BaseScreenView):
                 id="config_data",
             ),
             buttons=[
+                # MDFlatButton(
+                #     text="IMPORT",
+                #     theme_text_color="Custom",
+                #     on_release=self.file_manager_open,
+                # ),
                 MDFlatButton(
                     text="CANCEL",
                     theme_text_color="Custom",
@@ -106,6 +124,49 @@ class ConfigScreenView(BaseScreenView):
                 ),
             ],
         )
+
+    def file_manager_open(self, instance):
+        print("FILE MANAGER OPEN")
+        # get list of files in the root directory of android device
+        # local_path_mobile="/home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile"
+        local_path_mobile="/storage/emulated/0"
+        self.file_manager.show(local_path_mobile)  # output manager to the screen
+        self.manager_open = True
+
+    def select_path(self, path: str):
+        try:
+            # get all files in the selected directory
+            files = os.listdir(path)
+            print("FILES", files)
+
+            self.exit_manager()
+            with open(path, "r") as f:
+                content=f.read()
+            key_value_pairs = [line.strip().split('=', 1) for line in content.splitlines()]
+            obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
+            if "CLIENT_ID" in obj and "CLIENT_SECRET" in obj:
+                self.ids.oauth2_client_id.text = obj['CLIENT_ID']
+                self.ids.oauth2_client_secret.text = obj['CLIENT_SECRET']
+                with open(os.path.join(".authconfig"), "w") as f:
+                    f.write(content)
+            elif "CONSUMER_TOKEN" in obj and "EMPLOYEE_TOKEN" in obj:
+                self.ids.tripletex_consumer_token.text = obj['CONSUMER_TOKEN']
+                self.ids.tripletex_employee_token.text = obj['EMPLOYEE_TOKEN']
+                with open(os.path.join(".authconfig"), "w") as f:
+                    f.write(content)
+            elif "NODE" in obj and "JWT" in obj:
+                self.ids.node_url.text = obj['NODE']
+                self.ids.node_jwt_token.text = obj['JWT']
+                with open(os.path.join(".syncconfig"), "w") as f:
+                    f.write(content)
+            else:
+                toast("Invalid config parameters")
+        except Exception as e:
+            toast("Cannot read config file")
+
+    def exit_manager(self, *args):
+        self.manager_open = False
+        self.file_manager.close()
 
     def cancel_dialog(self, instance):
         self.dialog.dismiss()
