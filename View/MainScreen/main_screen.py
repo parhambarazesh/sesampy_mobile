@@ -7,6 +7,7 @@ from kivy.metrics import dp
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.spinner import MDSpinner
+from kivymd.toast import toast
 
 from Model.connector_screen import ConnectorScreenModel as connector_model
 from kivymd.uix.list import OneLineAvatarIconListItem, IconLeftWidget
@@ -23,7 +24,7 @@ class MainScreenView(BaseScreenView):
     def on_pre_enter(self, *args):
         if connector_model.current_connector != "":
             if os.path.exists(f"{connector_model.current_connector}-connector/.expanded"):
-                self.ids.progress_bar.value = 30
+                toast("Please wait while the config is loaded...")
 
     def on_enter(self, *args):
         os.chdir("core")
@@ -56,7 +57,6 @@ class MainScreenView(BaseScreenView):
                                 id=f"pipe_item_{file}",
                             )
                         )
-                self.ids.progress_bar.value = 40
                 systems_dir = f"{current_connector}-connector/.expanded/systems/"
                 for file in os.listdir(systems_dir):
                     print("System: " + file)
@@ -74,7 +74,6 @@ class MainScreenView(BaseScreenView):
                                 id=f"system_item_{file}",
                             )
                         )
-                self.ids.progress_bar.value = 80
                 metadata_dir = f"{current_connector}-connector/.expanded/"
                 for file in os.listdir(metadata_dir):
                     print("Metadata: " + file)
@@ -92,8 +91,6 @@ class MainScreenView(BaseScreenView):
                                 id=f"metadata_item_{file}",
                             )
                         )
-                self.ids.progress_bar.value = 100
-        print("PATH: " + os.getcwd())
         print("Entered Main Screen")
 
     def model_is_changed(self) -> None:
@@ -108,7 +105,7 @@ class MainScreenView(BaseScreenView):
         """
         Switches the application window to the specified window.
         """
-        print(f"Switching to {window_name} window!!!!!!!!!!!!")
+        print(f"Switching to {window_name} window!")
         self.manager_screens.current = window_name
 
     def get_file(self, *args) -> None:
