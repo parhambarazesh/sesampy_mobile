@@ -3,7 +3,7 @@ import logging
 
 import time
 import sys,stat
-from kivy.clock import mainthread
+from kivy.clock import mainthread, Clock
 from kivymd.uix.spinner import MDSpinner
 
 from constants import ROOT_DIR
@@ -66,15 +66,36 @@ class CommandScreenView(BaseScreenView):
     def authenticate(self):
         self.args_dict["command"] = "authenticate"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_download_toggle()
+
+        self.schedule = Clock.schedule_interval(self.code_block, 10)
+
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in authenticate command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_download_toggle()
 
     def authenticate_thread(self):
         self.spinner_authenticate_toggle()
         threading.Thread(target=(self.authenticate)).start()
+
+    def code_block(self, dt):
+        # Search for the word in the file
+        with open('output.log', 'r') as f:
+            contents = f.read()
+            if 'All secrets and environment' in contents:
+                # Stop the scheduled interval
+                Clock.unschedule(self.schedule)
+                print("Word found, stopping code block...")
+                os.chdir(os.path.join(ROOT_DIR, "core"))
+                with open('output.log', 'r') as f:
+                    self.logs = f.read()
+                self.spinner_authenticate_toggle()
+                return
 
     @mainthread
     def spinner_download_toggle(self):
@@ -109,11 +130,15 @@ class CommandScreenView(BaseScreenView):
     def upload(self):
         self.args_dict["command"] = "upload"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_upload_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in upload command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_upload_toggle()
     def upload_thread(self):
         self.spinner_upload_toggle()
         threading.Thread(target=(self.upload)).start()
@@ -129,11 +154,15 @@ class CommandScreenView(BaseScreenView):
     def status(self):
         self.args_dict["command"] = "status"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_status_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in status command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_status_toggle()
     def status_thread(self):
         self.spinner_status_toggle()
         threading.Thread(target=(self.status)).start()
@@ -150,11 +179,15 @@ class CommandScreenView(BaseScreenView):
     def verify(self):
         self.args_dict["command"] = "verify"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_verify_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in verify command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_verify_toggle()
 
     def verify_thread(self):
         self.spinner_verify_toggle()
@@ -171,11 +204,15 @@ class CommandScreenView(BaseScreenView):
     def test(self):
         self.args_dict["command"] = "test"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_test_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in test command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_test_toggle()
     def test_thread(self):
         self.spinner_test_toggle()
         threading.Thread(target=(self.test)).start()
@@ -192,11 +229,15 @@ class CommandScreenView(BaseScreenView):
     def stop(self):
         self.args_dict["command"] = "stop"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_stop_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in stop command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_stop_toggle()
     def stop_thread(self):
         self.spinner_stop_toggle()
         threading.Thread(target=(self.stop)).start()
@@ -212,11 +253,15 @@ class CommandScreenView(BaseScreenView):
     def run(self):
         self.args_dict["command"] = "run"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_run_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in run command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_run_toggle()
     def run_thread(self):
         self.spinner_run_toggle()
         threading.Thread(target=(self.run)).start()
@@ -232,11 +277,15 @@ class CommandScreenView(BaseScreenView):
     def wipe(self):
         self.args_dict["command"] = "wipe"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_run_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in wipe command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_wipe_toggle()
     def wipe_thread(self):
         self.spinner_wipe_toggle()
         threading.Thread(target=(self.wipe)).start()
@@ -252,11 +301,15 @@ class CommandScreenView(BaseScreenView):
     def restart(self):
         self.args_dict["command"] = "restart"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_restart_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in restart command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_restart_toggle()
     def restart_thread(self):
         self.spinner_restart_toggle()
         threading.Thread(target=(self.restart)).start()
@@ -272,11 +325,15 @@ class CommandScreenView(BaseScreenView):
     def reset(self):
         self.args_dict["command"] = "reset"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_run_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in reset command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_reset_toggle()
     def reset_thread(self):
         self.spinner_reset_toggle()
         threading.Thread(target=(self.reset)).start()
@@ -292,11 +349,15 @@ class CommandScreenView(BaseScreenView):
     def convert(self):
         self.args_dict["command"] = "convert"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_convert_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in convert command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_convert_toggle()
     def convert_thread(self):
         self.spinner_convert_toggle()
         threading.Thread(target=(self.convert)).start()
@@ -312,11 +373,15 @@ class CommandScreenView(BaseScreenView):
     def dump(self):
         self.args_dict["command"] = "dump"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-        start_cli(self.args_dict)
-        os.chdir(os.path.join(ROOT_DIR, "core"))
-        with open('output.log', 'r') as f:
-            self.logs = f.read()
-        self.spinner_dump_toggle()
+        try:
+            start_cli(self.args_dict)
+        except:
+            logging.error("Error in dump command.")
+        finally:
+            os.chdir(os.path.join(ROOT_DIR, "core"))
+            with open('output.log', 'r') as f:
+                self.logs = f.read()
+            self.spinner_dump_toggle()
     def dump_thread(self):
         self.spinner_dump_toggle()
         threading.Thread(target=(self.dump)).start()
