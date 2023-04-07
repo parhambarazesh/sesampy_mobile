@@ -74,12 +74,10 @@ class CommandScreenView(BaseScreenView):
     def authenticate(self):
         self.args_dict["command"] = "authenticate"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
-
-        # check if .authconfig has consumer_token and employee_token
         with open(".authconfig", "r") as f:
             contents = f.read()
             if "client_id" in contents.lower() and "client_secret" in contents.lower():
-                self.schedule = Clock.schedule_interval(self.code_block, 10)
+                self.schedule = Clock.schedule_interval(self.wait_for_authenticate, 10)
 
         try:
             start_cli(self.args_dict)
@@ -95,7 +93,7 @@ class CommandScreenView(BaseScreenView):
         self.spinner_authenticate_toggle()
         threading.Thread(target=(self.authenticate)).start()
 
-    def code_block(self, dt):
+    def wait_for_authenticate(self, dt):
         # Search for the word in the file
         with open('output.log', 'r') as f:
             contents = f.read()
@@ -108,6 +106,21 @@ class CommandScreenView(BaseScreenView):
                     self.logs = f.read()
                 self.spinner_authenticate_toggle()
                 return
+
+    def wait_for_upload(self, dt):
+        # check if output.log exists
+        if os.path.exists("output.log"):
+            with open('output.log', 'r') as f:
+                contents = f.read()
+                if 'All secrets and environment' in contents:
+                    # Stop the scheduled interval
+                    Clock.unschedule(self.schedule)
+                    print("Word found, stopping code block...")
+                    os.chdir(os.path.join(ROOT_DIR, "core"))
+                    with open('output.log', 'r') as f:
+                        self.logs = f.read()
+                    self.spinner_upload_toggle()
+                    return
 
     @mainthread
     def spinner_download_toggle(self):
@@ -137,7 +150,6 @@ class CommandScreenView(BaseScreenView):
 
     @mainthread
     def spinner_upload_toggle(self):
-        # logging.basicConfig(filename='example.log', level=logging.DEBUG)
         if not self.ids.spinner_upload.active:
             self.ids.spinner_upload.active = True
             for id in [command for command in self.command_list if command != self.args_dict["command"]]:
@@ -152,6 +164,10 @@ class CommandScreenView(BaseScreenView):
     def upload(self):
         self.args_dict["command"] = "upload"
         self.args_dict["connector_dir"] = f"{self.current_connector}-connector"
+        with open(".authconfig", "r") as f:
+            contents = f.read()
+            if "client_id" in contents.lower() and "client_secret" in contents.lower():
+                self.schedule = Clock.schedule_interval(self.wait_for_upload, 10)
         try:
             start_cli(self.args_dict)
         except:
