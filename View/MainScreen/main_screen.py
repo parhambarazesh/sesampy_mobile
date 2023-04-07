@@ -21,9 +21,10 @@ class MainScreenView(BaseScreenView):
         os.chdir(ROOT_DIR)
 
     def on_pre_enter(self, *args):
-        if connector_model.current_connector!="":
+        if connector_model.current_connector != "":
             if os.path.exists(f"{connector_model.current_connector}-connector/.expanded"):
                 self.ids.progress_bar.value = 30
+
     def on_enter(self, *args):
         os.chdir("core")
         current_connector = connector_model.current_connector
@@ -92,7 +93,7 @@ class MainScreenView(BaseScreenView):
                             )
                         )
                 self.ids.progress_bar.value = 100
-        print("PATH: "+os.getcwd())
+        print("PATH: " + os.getcwd())
         print("Entered Main Screen")
 
     def model_is_changed(self) -> None:
@@ -139,8 +140,15 @@ class MainScreenView(BaseScreenView):
 
     def save_file(self, *args):
         try:
-            with open(self.selected_file, "w") as f:
-                json.dump(json.loads(self.ids.show_file.text), f, indent=4)
+            if self.selected_file.endswith("test-env.json"):
+                with open(f"{connector_model.current_connector}-connector/test-env.json", "w") as f:
+                    json.dump(json.loads(self.ids.show_file.text), f, indent=4)
+
+                with open(self.selected_file, "w") as f:
+                    json.dump(json.loads(self.ids.show_file.text), f, indent=4)
+            else:
+                with open(self.selected_file, "w") as f:
+                    json.dump(json.loads(self.ids.show_file.text), f, indent=4)
         except:
             # show a dialog
             dialog = MDDialog(
