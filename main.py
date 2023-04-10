@@ -119,7 +119,6 @@ from kivymd.uix.toolbar import MDTopAppBar
 
 
 
-
 # After you finish the project, remove the above code and uncomment the below
 # code to test the application normally without hot reloading.
 

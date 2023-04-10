@@ -191,6 +191,7 @@ class ConfigScreenView(BaseScreenView):
 
                 self.ids.oauth2_client_id.text = "OAuth2 Client ID"
                 self.ids.oauth2_client_secret.text = "OAuth2 Client Secret"
+
     def model_is_changed(self) -> None:
         """
         Called whenever any change has occurred in the data model.
