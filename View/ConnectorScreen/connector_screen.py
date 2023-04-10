@@ -17,6 +17,10 @@ from constants import ROOT_DIR
 class ConnectorScreenView(BaseScreenView):
     def on_pre_leave(self, *args):
         os.chdir(ROOT_DIR)
+
+    def on_pre_enter(self, *args):
+        self.ids.connector_list.clear_widgets()
+        self.ids.loading_connectors.opacity = 1
     def on_enter(self, *args):
         print("on_enter")
         os.chdir("core")
@@ -49,6 +53,7 @@ class ConnectorScreenView(BaseScreenView):
                     id=f"connector_item_{connector[0]}",
                 )
             )
+        self.ids.loading_connectors.opacity = 0
 
     def set_active_connector(self, connector, *args):
         connector_model.current_connector = connector[0]
