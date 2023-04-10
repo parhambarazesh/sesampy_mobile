@@ -1,0 +1,18 @@
+Using /home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile as base directory
+CURRENT PATH1: /home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile/core
+Found config file '.syncconfig' in '/home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile/core'
+Cannot locate config file '.sesamconfig.json' in current or parent folder. Proceeding without it.
+Connecting to Sesam using url 'https://datahub-b2943680.sesam.cloud/api' and JWT 'eyJ0eXAiOi*********UiwS_8FHDQ'
+Found config file '.authconfig' in '/home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile/core'
+Could not find consumer_token in .authconfig file. Checking the arguments.
+CURRENT DIRECTORY: /home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile/core
+Missing consumer_token and/or employee_token. Please provide them in .authconfig or as arguments.
+Sesam client failed!
+Underlying exception was: 1
+Traceback (most recent call last):
+  File "/home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile/core/sesam_func.py", line 2293, in start_cli
+    sesam_cmd_client.authenticate()
+  File "/home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile/core/sesam_func.py", line 960, in authenticate
+    sys.exit(1)
+SystemExit: 1
+Total run time was 0 seconds

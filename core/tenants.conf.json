@@ -1,0 +1,21 @@
+{
+  "_id": "tenants",
+  "type": "pipe",
+  "source": {
+    "type": "embedded",
+    "entities": [{
+      "_id": "26127173",
+      "name": "High level config"
+    }, {
+      "_id": "26525078",
+      "name": "App test account 1"
+    }]
+  },
+  "pump": {
+    "schedule_interval": 30
+  },
+  "metadata": {
+    "$config-group": "high-level-config"
+  },
+  "namespaced_identifiers": false
+}
