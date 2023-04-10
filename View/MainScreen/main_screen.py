@@ -1,14 +1,7 @@
 import json
-import threading
 from functools import partial
-
-from kivy.clock import mainthread, Clock
-from kivy.metrics import dp
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.spinner import MDSpinner
-from kivymd.toast import toast
-
 from Model.connector_screen import ConnectorScreenModel as connector_model
 from kivymd.uix.list import OneLineAvatarIconListItem, IconLeftWidget
 from View.base_screen import BaseScreenView
@@ -22,28 +15,25 @@ class MainScreenView(BaseScreenView):
         os.chdir(ROOT_DIR)
 
     def on_pre_enter(self, *args):
+        self.ids.pipes_list.clear_widgets()
+        self.ids.systems_list.clear_widgets()
+        self.ids.metadata_list.clear_widgets()
+        self.ids.show_file.text = ""
         if connector_model.current_connector != "":
             if os.path.exists(f"{connector_model.current_connector}-connector/.expanded"):
-                toast("Please wait while the config is loaded...")
+                self.ids.loading_configs.opacity = 1
 
-    def on_enter(self, *args):
-        os.chdir("core")
+    def load_config_files(self):
         current_connector = connector_model.current_connector
-        # self.ids.title_pipes.text = "Active Connector: " + current_connector
-        # self.ids.title_systems.text = "Active Connector: " + current_connector
-        # self.ids.title_metadata.text = "Active Connector: " + current_connector
         if connector_model.current_connector != "":
-            # remove all OneLineAvatarIconListItem widgets from the lists
-            self.ids.pipes_list.clear_widgets()
-            self.ids.systems_list.clear_widgets()
-            self.ids.metadata_list.clear_widgets()
-
+            self.pipes_list = []
             if os.path.exists(f"{current_connector}-connector/.expanded"):
                 pipes_dir = f"{current_connector}-connector/.expanded/pipes/"
                 print(f"PIPES_DIR: {pipes_dir}")
                 for file in os.listdir(pipes_dir):
                     print("Pipe: " + file)
                     if file.endswith(".json"):  # check if the file is a JSON file
+                        self.pipes_list.append(file)
                         self.ids.pipes_list.add_widget(
                             OneLineAvatarIconListItem(
                                 IconLeftWidget(
@@ -58,9 +48,11 @@ class MainScreenView(BaseScreenView):
                             )
                         )
                 systems_dir = f"{current_connector}-connector/.expanded/systems/"
+                self.systems_list = []
                 for file in os.listdir(systems_dir):
                     print("System: " + file)
                     if file.endswith(".json"):
+                        self.systems_list.append(file)
                         self.ids.systems_list.add_widget(
                             OneLineAvatarIconListItem(
                                 IconLeftWidget(
@@ -75,9 +67,11 @@ class MainScreenView(BaseScreenView):
                             )
                         )
                 metadata_dir = f"{current_connector}-connector/.expanded/"
+                self.metadata_list = []
                 for file in os.listdir(metadata_dir):
                     print("Metadata: " + file)
                     if file.endswith(".json"):
+                        self.metadata_list.append(file)
                         self.ids.metadata_list.add_widget(
                             OneLineAvatarIconListItem(
                                 IconLeftWidget(
@@ -91,6 +85,12 @@ class MainScreenView(BaseScreenView):
                                 id=f"metadata_item_{file}",
                             )
                         )
+                self.ids.loading_configs.opacity = 0
+
+
+    def on_enter(self, *args):
+        os.chdir("core")
+        self.load_config_files()
         print("Entered Main Screen")
 
     def model_is_changed(self) -> None:
@@ -99,7 +99,7 @@ class MainScreenView(BaseScreenView):
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
-        print(12)
+
 
     def switch_window(self, window_name: str) -> None:
         """
