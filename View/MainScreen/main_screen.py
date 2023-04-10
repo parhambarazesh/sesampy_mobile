@@ -10,6 +10,10 @@ import os
 from constants import ROOT_DIR
 
 
+from kivymd.uix.list import OneLineAvatarIconListItem, IconLeftWidget
+from View.base_screen import BaseScreenView
+import os
+
 class MainScreenView(BaseScreenView):
     def on_pre_leave(self, *args):
         os.chdir(ROOT_DIR)

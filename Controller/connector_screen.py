@@ -1,5 +1,7 @@
 import importlib
+
 import View.ConnectorScreen.connector_screen
+
 
 # We have to manually reload the view module in order to apply the
 # changes made to the code on a subsequent hot reload.
@@ -19,6 +21,6 @@ class ConnectorScreenController:
         self.model = model  # Model.command_screen.CommandScreenModel
         self.view = View.ConnectorScreen.connector_screen.ConnectorScreenView(controller=self, model=self.model)
 
+
     def get_view(self) -> View.ConnectorScreen.connector_screen:
         return self.view
-
