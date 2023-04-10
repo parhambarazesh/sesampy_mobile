@@ -1,8 +1,10 @@
+from kivy.clock import mainthread
 from kivymd.toast import toast
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.textfield import MDTextField
+from plyer import filechooser
 
 from View.base_screen import BaseScreenView
 import os
@@ -18,12 +20,6 @@ class ConfigScreenView(BaseScreenView):
 
     def on_pre_enter(self, *args):
         self.manager_open = False
-        self.file_manager = MDFileManager(
-            exit_manager=self.exit_manager,
-            select_path=self.select_path,
-            show_hidden_files=True,
-            # ext=[".txt", ".pdf", ".doc"],
-        )
         self.data = {
             "Node Config": [
                 "pipe-disconnected",
@@ -39,7 +35,7 @@ class ConfigScreenView(BaseScreenView):
             ],
             "Import": [
                 "import",
-                "on_release", self.file_manager_open
+                "on_release", self.file_chooser_open
             ],
         }
         self.speed_dial = MDFloatingActionButtonSpeedDial(
@@ -125,33 +121,28 @@ class ConfigScreenView(BaseScreenView):
             ],
         )
 
-    def file_manager_open(self, instance):
-        print("FILE MANAGER OPEN")
-        # get list of files in the root directory of android device
-        # local_path_mobile="/home/parham/Documents/MyPersonalWorks/Android/MyApps/sesampy_mobile"
-        local_path_mobile="/storage/emulated/0"
-        self.file_manager.show(local_path_mobile)  # output manager to the screen
-        self.manager_open = True
+    def file_chooser_open(self, instance):
+        filechooser.open_file(on_selection=self.selected)
 
-    def select_path(self, path: str):
+    @mainthread
+    def selected(self, path: str):
         try:
-            # get all files in the selected directory
-            files = os.listdir(path)
-            print("FILES", files)
-
-            self.exit_manager()
-            with open(path, "r") as f:
+            with open(path[0], "r") as f:
                 content=f.read()
             key_value_pairs = [line.strip().split('=', 1) for line in content.splitlines()]
             obj = {key.strip(): value.strip('"') for key, value in key_value_pairs}
             if "CLIENT_ID" in obj and "CLIENT_SECRET" in obj:
                 self.ids.oauth2_client_id.text = obj['CLIENT_ID']
                 self.ids.oauth2_client_secret.text = obj['CLIENT_SECRET']
+                self.ids.tripletex_consumer_token.text = ""
+                self.ids.tripletex_employee_token.text = ""
                 with open(os.path.join(".authconfig"), "w") as f:
                     f.write(content)
             elif "CONSUMER_TOKEN" in obj and "EMPLOYEE_TOKEN" in obj:
                 self.ids.tripletex_consumer_token.text = obj['CONSUMER_TOKEN']
                 self.ids.tripletex_employee_token.text = obj['EMPLOYEE_TOKEN']
+                self.ids.oauth2_client_id.text = ""
+                self.ids.oauth2_client_secret.text = ""
                 with open(os.path.join(".authconfig"), "w") as f:
                     f.write(content)
             elif "NODE" in obj and "JWT" in obj:
@@ -162,11 +153,9 @@ class ConfigScreenView(BaseScreenView):
             else:
                 toast("Invalid config parameters")
         except Exception as e:
-            toast("Cannot read config file")
+            print(f"ERROR: {e}")
+            toast(f"Cannot read config file: {e}")
 
-    def exit_manager(self, *args):
-        self.manager_open = False
-        self.file_manager.close()
 
     def cancel_dialog(self, instance):
         self.dialog.dismiss()
