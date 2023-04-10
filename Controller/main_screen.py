@@ -98,5 +98,6 @@ class MainScreenController:
     #     self.view.ids.show.badge_icon = "numeric-1"
     #     self.view.ids.show_file.text = json.dumps(data, indent=4)
 
+
     def get_view(self) -> View.MainScreen.main_screen:
         return self.view
