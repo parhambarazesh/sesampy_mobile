@@ -63,7 +63,6 @@ class CommandScreenView(BaseScreenView):
             self.ids.spinner_authenticate.active = True
             for id in [command for command in self.command_list if command != self.args_dict["command"]]:
                 self.ids[id].disabled = True
-
         else:
             self.ids.spinner_authenticate.active = False
             self.ids.log.text = self.logs
@@ -167,7 +166,7 @@ class CommandScreenView(BaseScreenView):
         with open(".authconfig", "r") as f:
             contents = f.read()
             if "client_id" in contents.lower() and "client_secret" in contents.lower():
-                self.schedule = Clock.schedule_interval(self.wait_for_upload, 10)
+                self.schedule = Clock.schedule_interval(self.wait_for_upload, 1)
         try:
             start_cli(self.args_dict)
         except:
