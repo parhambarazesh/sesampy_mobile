@@ -73,6 +73,15 @@
                         icon: 'delete'
                         theme_text_color: "Custom"
                         text_color: "red"
+    MDLabel:
+        id: loading_connectors
+        text: "Loading Connectors..."
+        halign: "center"
+        font_style: "H5"
+        theme_text_color: "Custom"
+        text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        opacity: 0
 
 
     MDScreenManager:
