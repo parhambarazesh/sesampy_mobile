@@ -205,7 +205,7 @@ class sesampy(MDApp):
         if window_name == "main_screen":
             self.top_app_bar.title = "Sesampy"
         else:
-            self.top_app_bar.title = window_name.replace("_", " ").title()
+            self.top_app_bar.title = window_name.replace("_screen", "s").title()
 
     def nav_drawer_open(self):
         current_screen = self.manager_screens.current_screen
