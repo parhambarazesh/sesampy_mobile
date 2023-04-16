@@ -1,6 +1,6 @@
 <CommandScreenView>
     MDBottomNavigation:
-        #panel_color: "#eeeaea"
+#        panel_color: "#eeeaea"
         selected_color_background: "orange"
         text_color_active: "lightgrey"
 
@@ -10,15 +10,15 @@
             MDBoxLayout:
                 id: box
                 orientation: 'vertical'
-                MDLabel:
-                    id: command
-                    text: 'Commands'
-                    halign: 'center'
-                    font_style: 'H6'
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    theme_text_color: 'Custom'
-                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
+#                MDLabel:
+#                    id: command
+#                    text: 'Commands'
+#                    halign: 'center'
+#                    font_style: 'H6'
+#                    size_hint_y: None
+#                    height: self.texture_size[1]
+#                    theme_text_color: 'Custom'
+#                    text_color: (250/255,250/255,250/255,1) if self.theme_cls.theme_style == "Dark" else (18/255,18/255,18/255,1)
 
                 ScrollView:
                     id: scroll
