@@ -47,6 +47,9 @@ class MainScreenView(BaseScreenView):
                                     text_color="blue"
                                 ),
                                 text=file,
+                                text_color=(
+                                    250 / 255, 250 / 255, 250 / 255, 1) if self.theme_cls.theme_style == "Dark" else (
+                                    18 / 255, 18 / 255, 18 / 255, 1),
                                 on_release=partial(self.open_pipe, file),
                                 id=f"pipe_item_{file}",
                             )
@@ -66,6 +69,10 @@ class MainScreenView(BaseScreenView):
                                     text_color="blue"
                                 ),
                                 text=file,
+                                theme_text_color="Custom",
+                                text_color=(
+                                250 / 255, 250 / 255, 250 / 255, 1) if self.theme_cls.theme_style == "Dark" else (
+                                18 / 255, 18 / 255, 18 / 255, 1),
                                 on_release=partial(self.open_system, file),
                                 id=f"system_item_{file}",
                             )
@@ -85,6 +92,10 @@ class MainScreenView(BaseScreenView):
                                     text_color="blue"
                                 ),
                                 text=file,
+                                theme_text_color="Custom",
+                                text_color=(
+                                250 / 255, 250 / 255, 250 / 255, 1) if self.theme_cls.theme_style == "Dark" else (
+                                18 / 255, 18 / 255, 18 / 255, 1),
                                 on_release=partial(self.open_metadata, file),
                                 id=f"metadata_item_{file}",
                             )
