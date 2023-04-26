@@ -159,7 +159,7 @@ class sesampy(MDApp):
 
     def build(self) -> MDScreenManager:
         self.generate_application_screens()
-        top_app_bar = MDTopAppBar(title="Sesampy",
+        self.top_app_bar = MDTopAppBar(title="Sesampy",
                                   pos_hint={'top': 1},
                                   md_bg_color=self.theme_cls.primary_color,
                                   use_overflow=True,
@@ -174,7 +174,7 @@ class sesampy(MDApp):
                                   ]
                                   )
         self.layout = BoxLayout(orientation='vertical')
-        self.layout.add_widget(top_app_bar)
+        self.layout.add_widget(self.top_app_bar)
         self.layout.add_widget(self.manager_screens)
         return self.layout
 
@@ -202,6 +202,10 @@ class sesampy(MDApp):
         """
         print(f"Switching to {window_name} window")
         self.manager_screens.current = window_name
+        if window_name == "main_screen":
+            self.top_app_bar.title = "Sesampy"
+        else:
+            self.top_app_bar.title = window_name.replace("_screen", "s").title()
 
     def nav_drawer_open(self):
         current_screen = self.manager_screens.current_screen
